@@ -11,6 +11,16 @@ export interface Player {
   winningsChange: number;
 }
 
+// {
+//     rank: 5,
+//     name: 'Ogo',
+//     games_played: 1,
+//     win_percentage: 0.0,
+//     wins: 0,
+//     ppg: 0.0,
+//     total_points: 0,
+//     winnings: -40,
+//   },
 export const data: Player[] = [
   {
     rank: 1,

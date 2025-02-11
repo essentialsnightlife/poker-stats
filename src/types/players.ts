@@ -1,8 +1,10 @@
 export type TPlayer = {
-  id: number;
+  rank: number;
   name: string;
-  nickname?: string;
-  birthday?: string;
-  stats: null | number;
-  img?: string;
+  games_played: number;
+  win_percentage: number;
+  wins: number;
+  ppg: number;
+  total_points: number;
+  winnings: number;
 };

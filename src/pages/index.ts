@@ -1,2 +1,2 @@
-export { Board } from './board';
 export { Home } from './home';
+export { Board } from './board';

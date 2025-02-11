@@ -11,32 +11,23 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ModeToggle } from './mode-toggle';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Menu } from 'lucide-react';
+import { links } from './constants';
+import { Sidebar } from './sidebar';
 
 export function Header() {
   return (
     <header className='bg-background sticky top-0 z-50 border-b'>
       <div className='container flex h-16 items-center justify-between'>
         <div className='flex items-center gap-4'>
-          <Button variant='ghost' size='icon' className='md:hidden'>
-            <Menu className='h-6 w-6' />
-            <span className='sr-only'>Toggle sidebar</span>
-          </Button>
+          <Sidebar />
           <h1 className='text-xl font-bold'>PokerStats</h1>
         </div>
         <nav className='hidden items-center gap-6 md:flex'>
-          <Link to='/' className='text-sm font-medium'>
-            Dashboard
-          </Link>
-          <Link to='/board' className='text-sm font-medium'>
-            Board
-          </Link>
-          <a href='#' className='text-sm font-medium'>
-            Statistics
-          </a>
-          <a href='#' className='text-sm font-medium'>
-            Settings
-          </a>
+          {links.map(({ to, label }) => (
+            <Link key={to} to={to} className='text-sm font-medium'>
+              {label}
+            </Link>
+          ))}
         </nav>
         <div className='flex items-center gap-4'>
           <ModeToggle />

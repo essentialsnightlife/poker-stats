@@ -2,9 +2,18 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-function Table({ className, ...props }: React.ComponentProps<'table'>) {
+function Table({
+  className,
+  hasBorder = false,
+  ...props
+}: React.ComponentProps<'table'> & Partial<{ hasBorder: boolean }>) {
   return (
-    <div className='relative w-full overflow-auto'>
+    <div
+      className={cn(
+        'relative w-full overflow-auto',
+        hasBorder && 'rounded-md border',
+      )}
+    >
       <table
         data-slot='table'
         className={cn('w-full caption-bottom text-sm', className)}
