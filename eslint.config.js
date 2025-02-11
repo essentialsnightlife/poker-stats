@@ -8,7 +8,7 @@ import prettierPlugin from 'eslint-plugin-prettier';
 import tanstackQuery from '@tanstack/eslint-plugin-query';
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules'] },
+  { ignores: ['dist', 'node_modules', 'src/index.css'] },
   {
     extends: [
       js.configs.recommended,
