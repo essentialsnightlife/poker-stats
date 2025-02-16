@@ -1,4 +1,4 @@
-import { TPlayer } from '@/types/players';
+import { TLeaderBoard } from '@/types/players';
 import { Column } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 import { ReactNode } from 'react';
@@ -8,7 +8,7 @@ export const Btn = ({
   column,
 }: {
   children: ReactNode;
-  column: Column<TPlayer, unknown>;
+  column: Column<TLeaderBoard, unknown>;
 }) => (
   <button
     className='hover:text-primary group flex cursor-pointer items-center gap-1 transition-all duration-300 md:gap-2'

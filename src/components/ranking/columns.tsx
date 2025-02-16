@@ -1,4 +1,4 @@
-import { TPlayer } from '@/types/players';
+import { TLeaderBoard } from '@/types/players';
 import { ColumnDef } from '@tanstack/react-table';
 import { Btn } from './btn';
 import { cn } from '@/lib/utils';
@@ -45,7 +45,7 @@ const formatRankChange = (change: number) => (
   </span>
 );
 
-export const columns: ColumnDef<TPlayer>[] = [
+export const columns: ColumnDef<TLeaderBoard>[] = [
   {
     accessorKey: 'rank',
     header: ({ column }) => <Btn column={column}>Rank</Btn>,

@@ -19,8 +19,10 @@ import { useGetLeaderboard } from '@/lib/services/players';
 import { columns } from './columns';
 
 export function RankingTable() {
-  const { data, isLoading } = useGetLeaderboard();
+  const { data, isLoading, isError, error } = useGetLeaderboard();
   const [sorting, setSorting] = useState<SortingState>([]);
+
+  console.log(isError, error);
 
   const table = useReactTable({
     data: data || [],
