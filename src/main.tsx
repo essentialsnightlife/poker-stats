@@ -4,7 +4,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'; // ✅ Import DevTools
 
 import { routeTree } from './routeTree.gen';
-import { TanstackProvider } from './app/providers';
+import { Tanstack as TanstackProvider } from '@/components/providers/tanstack';
 
 // Create a new router instance
 const router = createRouter({ routeTree });
