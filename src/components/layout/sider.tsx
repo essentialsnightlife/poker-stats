@@ -11,8 +11,12 @@ import {
   SidebarFooter,
 } from '../ui/sidebar';
 import { User } from './user';
+import { useAppStore } from '@/lib/store/app';
+import { useIsMobile } from '@/lib/hooks/use-mobile';
 
 export const Sider = () => {
+  const isMobile = useIsMobile();
+  const { openMobile, setOpenMobile } = useAppStore();
   const matchRoute = useMatchRoute();
 
   const menu = [
@@ -33,6 +37,11 @@ export const Sider = () => {
     },
   ];
 
+  const handleToggleMobileMenu = () => {
+    if (!isMobile) return;
+    setOpenMobile(!openMobile);
+  };
+
   return (
     <Sidebar collapsible='icon'>
       <SidebarHeader>
@@ -40,6 +49,7 @@ export const Sider = () => {
           size='lg'
           asChild
           className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
+          onClick={handleToggleMobileMenu}
         >
           <Link to='/'>
             <img
@@ -59,6 +69,7 @@ export const Sider = () => {
                 <SidebarMenuButton
                   asChild
                   isActive={!!matchRoute({ to, fuzzy: true })}
+                  onClick={handleToggleMobileMenu}
                 >
                   <Link to={to}>
                     <Icon />

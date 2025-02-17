@@ -1,24 +1,13 @@
-import { RouterProps } from 'react-router-dom';
-import { Action, Location, BrowserHistory } from 'history';
-
 export interface IAppStore {
   theme: Theme;
-  action: Action;
-  location: Location;
-  isSidebarOpen: boolean;
-
-  setHistory: ({ action, location }: THistory) => void;
+  sidebarState: SidebarState;
+  isMobile: boolean;
+  openMobile: boolean;
   toggleTheme: () => void;
   toggleSidebar: () => void;
+  setSidebarState: (state: SidebarState) => void;
+  setOpenMobile: (open: boolean) => void;
 }
 
 type Theme = 'light' | 'dark';
-
-type THistory = {
-  action: Action;
-  location: Location;
-};
-
-export type TRouterProps = {
-  history: BrowserHistory;
-} & Partial<RouterProps>;
+type SidebarState = 'expanded' | 'collapsed';

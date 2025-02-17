@@ -15,6 +15,6 @@ export const Btn = ({
     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
   >
     {children}
-    <ArrowUpDown className='size-4 transition-transform duration-300 group-hover:rotate-180' />
+    <ArrowUpDown className='size-4 shrink-0 transition-transform duration-300 group-hover:rotate-180' />
   </button>
 );
