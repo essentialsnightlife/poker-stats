@@ -1,60 +1,18 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { ModeToggle } from './mode-toggle';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { links } from './constants';
-import { Sidebar } from './sidebar';
+import { SidebarTrigger } from '@/components/ui/sidebar';
+import { Bell } from 'lucide-react';
 
 export function Header() {
   return (
-    <header className='bg-background sticky top-0 z-50 border-b'>
-      <div className='container flex h-16 items-center justify-between'>
-        <div className='flex items-center gap-4'>
-          <Sidebar />
-          <h1 className='text-xl font-bold'>PokerStats</h1>
-        </div>
-        <nav className='hidden items-center gap-6 md:flex'>
-          {links.map(({ to, label }) => (
-            <Link key={to} to={to} className='text-sm font-medium'>
-              {label}
-            </Link>
-          ))}
-        </nav>
-        <div className='flex items-center gap-4'>
+    <header className='bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-10 border-b backdrop-blur'>
+      <div className='container flex items-center justify-between px-4 py-2'>
+        <SidebarTrigger />
+        <div className='flex items-center gap-2'>
           <ModeToggle />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
-                <Avatar className='h-8 w-8'>
-                  <AvatarImage src='/avatars/01.png' alt='@username' />
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className='w-56' align='end' forceMount>
-              <DropdownMenuLabel className='font-normal'>
-                <div className='flex flex-col space-y-1'>
-                  <p className='text-sm leading-none font-medium'>John Doe</p>
-                  <p className='text-muted-foreground text-xs leading-none'>
-                    john@example.com
-                  </p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Log out</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button size='icon' variant='outline'>
+            <Bell />
+          </Button>
         </div>
       </div>
     </header>

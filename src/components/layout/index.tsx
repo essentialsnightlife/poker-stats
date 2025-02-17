@@ -1,14 +1,17 @@
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
+import { FC, PropsWithChildren } from 'react';
+import { Sider } from './sider';
 import { Header } from './header';
-import { Footer } from './footer';
 
-export const Layout = () => {
+export const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <>
-      <Header />
-      <main className='container py-5'>
-        <Outlet />
-      </main>
-      <Footer />
-    </>
+    <SidebarProvider>
+      <Sider />
+
+      <SidebarInset>
+        <Header />
+        <div className='container'>{children}</div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };
