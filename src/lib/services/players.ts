@@ -3,6 +3,7 @@ import {
   TGameResult,
   TLeaderBoard,
   TPlayer,
+  TPlayerDashboard,
   TResultSummary,
 } from '@/types/players';
 import { supabase } from './api';
@@ -62,6 +63,24 @@ export const useGetPlayerStats = (id: number) =>
   useQuery({
     queryKey: [Endpoints.GetPlayers, id],
     queryFn: () => getPlayerStats(id),
+  });
+
+const getPlayerDashboard = async (
+  playerId: number,
+): Promise<TPlayerDashboard> =>
+  (
+    await supabase
+      .from(Endpoints.GetPlayerDashboard)
+      .select()
+      .eq('player_id', playerId)
+      .single()
+      .throwOnError()
+  ).data;
+
+export const useGetPlayerDashboard = (playerId: number) =>
+  useQuery({
+    queryKey: [Endpoints.GetPlayerDashboard, playerId],
+    queryFn: () => getPlayerDashboard(playerId),
   });
 
 // Players > Get Player Stats / Dashboard

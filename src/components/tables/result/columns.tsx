@@ -9,7 +9,7 @@ export const columns: ColumnDef<TGameResult>[] = [
     accessorKey: 'game_date',
     header: 'Game Date',
     cell: ({ row }) => (
-      <div className='flex items-center whitespace-nowrap'>
+      <div className='flex items-center'>
         <Calendar className='text-muted-foreground mr-2 size-4' />
         {row.original.game_date}
       </div>

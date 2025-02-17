@@ -1,3 +1,4 @@
+import { dateFormatter } from '@/lib/utils';
 import { TResultSummary } from '@/types/players';
 import { ColumnDef } from '@tanstack/react-table';
 
@@ -5,6 +6,7 @@ export const columns: ColumnDef<TResultSummary>[] = [
   {
     accessorKey: 'date',
     header: 'Date',
+    cell: ({ row }) => dateFormatter(row.original.date),
   },
   {
     accessorKey: 'location',

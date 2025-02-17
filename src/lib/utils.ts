@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from 'clsx';
+import dayjs from 'dayjs';
 import { createBrowserHistory } from 'history';
 import { twMerge } from 'tailwind-merge';
 import { StoreApi, UseBoundStore } from 'zustand';
@@ -26,3 +27,6 @@ export const createSelectors = <S extends UseBoundStore<StoreApi<object>>>(
 
   return store;
 };
+
+export const dateFormatter = (dateString?: string) =>
+  dayjs(dateString).format('MMMM D, YYYY');

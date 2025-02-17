@@ -11,8 +11,6 @@ import {
 import { columns } from './columns';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
-import { Stat } from './stat';
-import { DollarSign, Hash, Users, Trophy } from 'lucide-react';
 
 export const ResultGames = ({ playerId }: { playerId: number }) => {
   const { data, isLoading } = useGetPlayerGameResults(playerId);
@@ -23,44 +21,8 @@ export const ResultGames = ({ playerId }: { playerId: number }) => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const totalWinnings =
-    data?.reduce((sum, game) => sum + (game.total_winnings ?? 0), 0) || 0;
-  const totalGames = data?.length || 0;
-  const winRate =
-    totalGames > 0
-      ? ((data?.filter((game) => game.finishing_position === 1).length ?? 0) /
-          totalGames) *
-        100
-      : 0;
-
   return (
     <>
-      <div className='mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
-        <Stat
-          title='Total Winnings'
-          value={`$${totalWinnings}`}
-          loading={isLoading}
-          icon={DollarSign}
-        />
-        <Stat
-          title='Games Played'
-          value={totalGames}
-          loading={isLoading}
-          icon={Users}
-        />
-        <Stat
-          title='Win Rate'
-          value={`${(winRate * 100).toFixed(1)}%`}
-          loading={isLoading}
-          icon={Trophy}
-        />
-        <Stat
-          title='Player ID'
-          value={`#${playerId}`}
-          icon={Hash}
-          loading={isLoading}
-        />
-      </div>
       <Card>
         <CardHeader className='items-center justify-between'>
           <CardTitle>Game History</CardTitle>

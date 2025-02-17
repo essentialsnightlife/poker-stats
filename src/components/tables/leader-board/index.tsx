@@ -37,7 +37,7 @@ export const LeaderBoard = () => {
       <CardHeader className='items-center justify-between'>
         <CardTitle>Leaderboard</CardTitle>
         <Select>
-          <SelectTrigger className='w-[180px]'>
+          <SelectTrigger className='w-40'>
             <SelectValue placeholder='Sort by' />
           </SelectTrigger>
           <SelectContent>
