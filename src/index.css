@@ -132,11 +132,11 @@
     padding: 1rem 2rem;
   }
 
-  @variant lg {
-    padding: 1rem 3rem;
+  @variant md {
+    padding: 1rem 4rem;
   }
 
-  @variant xl {
-    padding: 1rem 4rem;
+  @variant lg {
+    padding: 1rem;
   }
 }

@@ -1,19 +1,14 @@
 import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+import { cn, dateFormatter } from '@/lib/utils';
 import { TGameResult } from '@/types/players';
 import { ColumnDef } from '@tanstack/react-table';
-import { Calendar, DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
+import { DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
 
 export const columns: ColumnDef<TGameResult>[] = [
   {
     accessorKey: 'game_date',
     header: 'Game Date',
-    cell: ({ row }) => (
-      <div className='flex items-center'>
-        <Calendar className='text-muted-foreground mr-2 size-4' />
-        {row.original.game_date}
-      </div>
-    ),
+    cell: ({ row }) => dateFormatter(row.original.game_date),
   },
   {
     accessorKey: 'location',

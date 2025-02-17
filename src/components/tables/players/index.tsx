@@ -10,6 +10,7 @@ import {
 import { Card } from '@/components/ui/card';
 import { columns } from './columns';
 import { Loader } from '../loader';
+import { Empty } from '../empty';
 
 export const Players = () => {
   const { data, isLoading } = useGetPlayers();
@@ -24,23 +25,23 @@ export const Players = () => {
     <Card title='Players'>
       <Table>
         <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
+          <TableRow>
+            {table.getFlatHeaders().map((header) => (
+              <TableHead key={header.id}>
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
+              </TableHead>
+            ))}
+          </TableRow>
         </TableHeader>
         <TableBody>
           {isLoading ? (
             <Loader columns={columns} />
-          ) : (
+          ) : table.getRowModel().rows.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
@@ -54,6 +55,8 @@ export const Players = () => {
                 ))}
               </TableRow>
             ))
+          ) : (
+            <Empty />
           )}
         </TableBody>
       </Table>

@@ -15,6 +15,5 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
         <Footer />
       </SidebarInset>
     </SidebarProvider>
-    // <div className='container'>{children}</div>
   );
 };

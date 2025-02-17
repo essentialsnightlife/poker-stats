@@ -18,6 +18,7 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/ui/select';
+import { Empty } from '../empty';
 
 export const LeaderBoard = () => {
   const { data, isLoading } = useGetLeaderboard();
@@ -87,11 +88,7 @@ export const LeaderBoard = () => {
               </TableRow>
             ))
           ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className='h-24 text-center'>
-                No results.
-              </TableCell>
-            </TableRow>
+            <Empty />
           )}
         </TableBody>
       </Table>

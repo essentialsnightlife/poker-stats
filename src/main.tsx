@@ -1,20 +1,8 @@
 import './index.css';
 import { createRoot } from 'react-dom/client';
-import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { App } from './app';
 
-import { routeTree } from './routeTree.gen';
-import { Tanstack as TanstackProvider } from '@/components/providers/tanstack';
+const container = document.getElementById('root')!;
+const root = createRoot(container);
 
-const router = createRouter({ routeTree });
-
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
-}
-
-createRoot(document.getElementById('root')!).render(
-  <TanstackProvider>
-    <RouterProvider router={router} />
-  </TanstackProvider>,
-);
+root.render(<App />);

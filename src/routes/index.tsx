@@ -46,7 +46,7 @@ function Index() {
               <CardTitle className='text-sm font-medium'>
                 {stat.title}
               </CardTitle>
-              <stat.icon className='text-muted-foreground h-4 w-4' />
+              <stat.icon className='text-muted-foreground size-4' />
             </CardHeader>
             <div className='text-2xl font-bold'>{stat.value}</div>
             <p className='text-muted-foreground text-xs'>{stat.description}</p>

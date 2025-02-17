@@ -1,4 +1,3 @@
-import { useGetPlayerGameResults } from '@/lib/services/players';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
@@ -9,12 +8,11 @@ import {
   TableCell,
 } from '@/components/ui/table';
 import { columns } from './columns';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
+import { Empty } from '../empty';
+import { TGameResult } from '@/types/players';
 
-export const ResultGames = ({ playerId }: { playerId: number }) => {
-  const { data, isLoading } = useGetPlayerGameResults(playerId);
-
+export const ResultGames = ({ data }: { data?: TGameResult[] }) => {
   const table = useReactTable({
     data: data || [],
     columns,
@@ -47,17 +45,7 @@ export const ResultGames = ({ playerId }: { playerId: number }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {isLoading ? (
-              Array.from({ length: 5 }).map((_, index) => (
-                <TableRow key={index}>
-                  {columns.map((row) => (
-                    <TableCell key={row.id}>
-                      <Skeleton className='h-7 w-full' />
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : table.getRowModel().rows.length ? (
+            {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -74,14 +62,7 @@ export const ResultGames = ({ playerId }: { playerId: number }) => {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className='h-24 text-center'
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
+              <Empty />
             )}
           </TableBody>
         </Table>
