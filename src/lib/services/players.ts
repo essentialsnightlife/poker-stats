@@ -7,7 +7,7 @@ import {
   TResultSummary,
 } from '@/types/players';
 import { supabase } from './api';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
 import { Endpoints } from './endpoints';
 
 const getLeaderboard = async (): Promise<TLeaderBoard[]> =>
@@ -49,20 +49,20 @@ export const useGetPlayers = () =>
   });
 
 // Players > Get Player Stats / Dashboard
-const getPlayerStats = async (id: number): Promise<TPlayer> =>
+const getPlayerStats = async (playerId: number): Promise<TPlayer> =>
   (
     await supabase
       .from(Endpoints.GetPlayers)
       .select()
-      .eq('id', id)
+      .eq('id', playerId)
       .single()
       .throwOnError()
   ).data;
 
-export const useGetPlayerStats = (id: number) =>
+export const useGetPlayerStats = (playerId: number) =>
   useQuery({
-    queryKey: [Endpoints.GetPlayers, id],
-    queryFn: () => getPlayerStats(id),
+    queryKey: [Endpoints.GetPlayers, playerId],
+    queryFn: () => getPlayerStats(playerId),
   });
 
 const getPlayerDashboard = async (
@@ -98,6 +98,32 @@ export const useGetPlayerGameResults = (playerId: number) =>
     queryKey: [Endpoints.GetPlayerGameResults, playerId],
     queryFn: () => getPlayerGameResults(playerId),
   });
+
+export const useGetPlayerData = (playerId: number) => {
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: [Endpoints.GetPlayers, playerId],
+        queryFn: () => getPlayerStats(playerId),
+      },
+      {
+        queryKey: [Endpoints.GetPlayerDashboard, playerId],
+        queryFn: () => getPlayerDashboard(playerId),
+      },
+      {
+        queryKey: [Endpoints.GetPlayerGameResults, playerId],
+        queryFn: () => getPlayerGameResults(playerId),
+      },
+    ],
+  });
+
+  return {
+    player: results[0].data,
+    dashboard: results[1].data,
+    gameResults: results[2].data,
+    isLoading: results.some((query) => query.isLoading),
+  };
+};
 
 // Games > Get Detailed Results
 const getDetailedResults = async (gameId: number): Promise<TDetailedResult> =>

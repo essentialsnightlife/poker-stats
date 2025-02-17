@@ -5,12 +5,13 @@ import {
   TableHeader,
   TableRow,
   TableHead,
-  TableBody,
   TableCell,
+  TableBody,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { columns } from './columns';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Empty } from '../empty';
 
 export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
   const { data, isLoading } = useGetRecentResultsSummary(limit);
@@ -69,11 +70,7 @@ export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
               </TableRow>
             ))
           ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className='h-24 text-center'>
-                No results.
-              </TableCell>
-            </TableRow>
+            <Empty />
           )}
         </TableBody>
       </Table>

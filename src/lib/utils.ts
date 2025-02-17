@@ -29,4 +29,4 @@ export const createSelectors = <S extends UseBoundStore<StoreApi<object>>>(
 };
 
 export const dateFormatter = (dateString?: string) =>
-  dayjs(dateString).format('MMMM D, YYYY');
+  dayjs(dateString).format('MMM D, YYYY');
