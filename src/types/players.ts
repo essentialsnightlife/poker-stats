@@ -32,6 +32,16 @@ export type TPlayer = {
   img: string;
 };
 
+export type TPlayerDashboard = {
+  player_id: number;
+  name: string;
+  total_wins: number;
+  top_2_finishes: number;
+  games_played: number;
+  days_since_last_win: number;
+  win_percentage: number;
+};
+
 export type TGameResult = {
   game_id: number;
   game_date: string;
