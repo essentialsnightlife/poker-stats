@@ -1,14 +1,10 @@
-import { HistoryRouterProvider, TanstackProvider } from './providers';
-
-import { history } from '@/lib/utils';
+import { TanstackProvider } from './providers';
 import { Router } from '@/router';
 
 export const App = () => {
   return (
-    <HistoryRouterProvider history={history}>
-      <TanstackProvider>
-        <Router />
-      </TanstackProvider>
-    </HistoryRouterProvider>
+    <TanstackProvider>
+      <Router />
+    </TanstackProvider>
   );
 };

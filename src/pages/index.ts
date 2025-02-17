@@ -1,2 +1,3 @@
 export { Home } from './home';
-export { Board } from './board';
+export { Games } from '../routes/games';
+export * from './players';

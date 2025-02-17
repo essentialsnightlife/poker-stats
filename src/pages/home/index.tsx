@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Trophy, Users, TrendingUp, DollarSign } from 'lucide-react';
+import { RankingTable } from '@/components/tables/leader-board';
 
 const stats = [
   {
@@ -40,49 +41,6 @@ const stats = [
     value: '89',
     icon: Users,
     description: 'Per game',
-  },
-];
-
-const leaderboardData = [
-  {
-    rank: 1,
-    name: 'Alice Smith',
-    gamesPlayed: 200,
-    winPercentage: 72,
-    ppg: 95,
-    winnings: 15000,
-  },
-  {
-    rank: 2,
-    name: 'Bob Johnson',
-    gamesPlayed: 180,
-    winPercentage: 70,
-    ppg: 92,
-    winnings: 14000,
-  },
-  {
-    rank: 3,
-    name: 'Charlie Brown',
-    gamesPlayed: 220,
-    winPercentage: 68,
-    ppg: 90,
-    winnings: 13500,
-  },
-  {
-    rank: 4,
-    name: 'David Lee',
-    gamesPlayed: 190,
-    winPercentage: 65,
-    ppg: 88,
-    winnings: 12000,
-  },
-  {
-    rank: 5,
-    name: 'Eva Garcia',
-    gamesPlayed: 210,
-    winPercentage: 63,
-    ppg: 87,
-    winnings: 11500,
   },
 ];
 
@@ -133,30 +91,7 @@ export function Home() {
             </div>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Rank</TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Games Played</TableHead>
-                  <TableHead>Win %</TableHead>
-                  <TableHead>PPG</TableHead>
-                  <TableHead>Winnings</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {leaderboardData.map((player) => (
-                  <TableRow key={player.rank}>
-                    <TableCell>{player.rank}</TableCell>
-                    <TableCell>{player.name}</TableCell>
-                    <TableCell>{player.gamesPlayed}</TableCell>
-                    <TableCell>{player.winPercentage}%</TableCell>
-                    <TableCell>{player.ppg}</TableCell>
-                    <TableCell>${player.winnings}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <RankingTable />
           </CardContent>
         </Card>
       </section>

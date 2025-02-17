@@ -1,5 +1,5 @@
 import { TLeaderBoard } from '@/types/players';
-import { Column } from '@tanstack/react-table';
+import type { Column } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 import { ReactNode } from 'react';
 
