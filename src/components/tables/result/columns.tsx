@@ -1,13 +1,13 @@
 import { Badge } from '@/components/ui/badge';
-import { cn, dateFormatter } from '@/lib/utils';
+import { cn, dateFormatter, priceFormatter } from '@/lib/utils';
 import { TGameResult } from '@/types/players';
 import { ColumnDef } from '@tanstack/react-table';
-import { DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 export const columns: ColumnDef<TGameResult>[] = [
   {
     accessorKey: 'game_date',
-    header: 'Game Date',
+    header: 'Date',
     cell: ({ row }) => dateFormatter(row.original.game_date),
   },
   {
@@ -30,6 +30,7 @@ export const columns: ColumnDef<TGameResult>[] = [
             position === 3 &&
               'bg-orange-100 text-orange-900 dark:bg-orange-900 dark:text-orange-100',
           )}
+          variant={position > 3 ? 'secondary' : 'outline'}
         >
           {position}
         </Badge>
@@ -37,28 +38,30 @@ export const columns: ColumnDef<TGameResult>[] = [
     },
   },
   {
-    accessorKey: 'total_winnings',
-    header: 'Winnings',
-    cell: ({ row }) => (
-      <div className='flex items-center gap-1 text-green-600 dark:text-green-400'>
-        <DollarSign className='size-4' />
-        {row.original.total_winnings}
-      </div>
-    ),
+    accessorKey: 'total_players',
+    header: 'Players',
+  },
+  {
+    accessorKey: 'game_buy_in',
+    header: 'Buy in Price',
+    cell: ({ row }) => priceFormatter(row.original.game_buy_in),
   },
   {
     accessorKey: 'total_spend',
-    header: 'Buy-ins',
+    header: 'Total Spent',
+  },
+  {
+    accessorKey: 'total_winnings',
+    header: 'Total Won',
     cell: ({ row }) => (
-      <div className='flex items-center gap-1 text-red-600 dark:text-red-400'>
-        <DollarSign className='size-4' />
-        {row.original.total_spend}
-      </div>
+      <p className='text-green-600 dark:text-green-400'>
+        {priceFormatter(row.original.total_winnings)}
+      </p>
     ),
   },
   {
     accessorKey: 'net_winnings',
-    header: 'Net',
+    header: 'Winnings',
     cell: ({ row }) => {
       const netWinnings = row.original.net_winnings;
       const Icon = netWinnings >= 0 ? TrendingUp : TrendingDown;
@@ -72,7 +75,8 @@ export const columns: ColumnDef<TGameResult>[] = [
               : 'text-red-600 dark:text-red-400',
           )}
         >
-          <Icon className='size-4' />${Math.abs(netWinnings)}
+          <Icon className='size-4' />
+          {priceFormatter(Math.abs(netWinnings))}
         </div>
       );
     },

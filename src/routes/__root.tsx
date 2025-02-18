@@ -11,12 +11,22 @@ const TanStackRouterDevtools =
         })),
       );
 
+const TanStackReactQueryDevtools =
+  process.env.NODE_ENV === 'production'
+    ? () => null
+    : lazy(() =>
+        import('@tanstack/react-query-devtools').then((res) => ({
+          default: res.ReactQueryDevtools,
+        })),
+      );
+
 export const Route = createRootRoute({
   component: () => (
     <Layout>
       <Outlet />
       <Suspense>
-        <TanStackRouterDevtools position='bottom-right' />
+        <TanStackRouterDevtools position='bottom-left' />
+        <TanStackReactQueryDevtools />
       </Suspense>
     </Layout>
   ),

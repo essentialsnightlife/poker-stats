@@ -1,6 +1,7 @@
 import {
   TDetailedResult,
   TGameResult,
+  TGameStatistics,
   TLeaderBoard,
   TPlayer,
   TPlayerDashboard,
@@ -17,6 +18,21 @@ export const useGetLeaderboard = () =>
   useQuery({
     queryKey: [Endpoints.GetLeaderBoard],
     queryFn: getLeaderboard,
+  });
+
+const getGameStatistics = async (): Promise<TGameStatistics> =>
+  (
+    await supabase
+      .from(Endpoints.GetGameStatistics)
+      .select()
+      .throwOnError()
+      .single()
+  ).data;
+
+export const useGetGameStatistics = () =>
+  useQuery({
+    queryKey: [Endpoints.GetGameStatistics],
+    queryFn: getGameStatistics,
   });
 
 // Home Page > Recent Games

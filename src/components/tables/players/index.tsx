@@ -22,7 +22,7 @@ export const Players = () => {
   });
 
   return (
-    <Card title='Players'>
+    <Card>
       <Table>
         <TableHeader>
           <TableRow>

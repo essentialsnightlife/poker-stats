@@ -5,7 +5,7 @@ import { ResultGames } from '@/components/tables';
 import { redirect } from '@tanstack/react-router';
 import { Loader } from '@/components/ui/loader';
 import { PlayerDashboard } from '@/components/dashboard';
-import { PLayerStats } from '@/components/player';
+import { PlayerStats } from '@/components/player';
 
 export const Route = createFileRoute('/players/$playerId')({
   component: RouteComponent,
@@ -37,7 +37,7 @@ function RouteComponent() {
         </Link>
       </Button>
 
-      <PLayerStats data={player} />
+      <PlayerStats data={player} />
 
       <PlayerDashboard data={dashboard} />
       <ResultGames data={gameResults} />

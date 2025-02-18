@@ -9,11 +9,19 @@ export type TLeaderBoard = {
   winnings: number;
 };
 
+export type TGameStatistics = {
+  total_games_played: number;
+  total_spend_on_games: number;
+  total_buy_ins: number;
+  total_rebuys: number;
+};
+
 export type TResultSummary = {
   date: string;
   location: string;
   pic: string;
   comments: string;
+  buy_in_price?: number;
   winner: string;
   second_place: string;
   third_place: string;

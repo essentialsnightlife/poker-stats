@@ -28,5 +28,12 @@ export const createSelectors = <S extends UseBoundStore<StoreApi<object>>>(
   return store;
 };
 
-export const dateFormatter = (dateString?: string) =>
-  dayjs(dateString).format('MMM D, YYYY');
+export const dateFormatter = (dateString: string, format?: string) =>
+  dayjs(dateString).format(format || 'MMM D, YYYY');
+
+export const priceFormatter = (amount: number, currency = 'GBP') => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+  }).format(amount);
+};

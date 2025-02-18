@@ -10,14 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import type { SortingState } from '@tanstack/react-table';
 import { useGetLeaderboard } from '@/lib/services/players';
 import { columns } from './columns';
-import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select';
+import { Card } from '@/components/ui/card';
 import { Empty } from '../empty';
 
 export const LeaderBoard = () => {
@@ -34,20 +27,7 @@ export const LeaderBoard = () => {
   });
 
   return (
-    <Card>
-      <CardHeader className='items-center justify-between'>
-        <CardTitle>Leaderboard</CardTitle>
-        <Select>
-          <SelectTrigger className='w-40'>
-            <SelectValue placeholder='Sort by' />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value='wins'>Wins</SelectItem>
-            <SelectItem value='ppg'>PPG</SelectItem>
-            <SelectItem value='earnings'>Earnings</SelectItem>
-          </SelectContent>
-        </Select>
-      </CardHeader>
+    <Card title='Leaderboard'>
       <Table>
         <TableHeader>
           <TableRow>

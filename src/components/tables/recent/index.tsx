@@ -1,5 +1,5 @@
 import { useGetRecentResultsSummary } from '@/lib/services/players';
-import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import {
   Table,
   TableHeader,
@@ -24,15 +24,6 @@ export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
 
   return (
     <Card>
-      <CardHeader className='items-center justify-between'>
-        <CardTitle>Recent Games</CardTitle>
-
-        {limit < 10 && (
-          <Button size='sm' asChild>
-            <Link to='/games'>View All Games</Link>
-          </Button>
-        )}
-      </CardHeader>
       <Table>
         <TableHeader>
           <TableRow>
@@ -74,6 +65,14 @@ export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
           )}
         </TableBody>
       </Table>
+
+      {limit < 10 && (
+        <div className='mt-4 flex justify-end'>
+          <Button size='sm' asChild>
+            <Link to='/games'>View All Games</Link>
+          </Button>
+        </div>
+      )}
     </Card>
   );
 };

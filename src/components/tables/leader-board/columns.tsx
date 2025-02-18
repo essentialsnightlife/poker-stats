@@ -1,65 +1,57 @@
 import { TLeaderBoard } from '@/types/players';
 import { ColumnDef } from '@tanstack/react-table';
 import { Btn } from './btn';
-import { cn } from '@/lib/utils';
+import { cn, priceFormatter } from '@/lib/utils';
+import { getRankColor, getRankDisplay } from './utils';
 
-const getRankColor = (rank: number) => {
-  if (rank === 1) return 'bg-yellow-400';
-  if (rank === 2) return 'bg-secondary';
-  if (rank === 3) return 'bg-border';
-  if (rank >= 9) return `bg-red-${Math.min(400 + (rank - 9) * 100, 700)}`;
-  return '';
-};
+// const formatWinningsChange = (change: number) => (
+//   <span
+//     className={cn(
+//       change > 0
+//         ? 'text-green-600'
+//         : change < 0
+//           ? 'text-red-600'
+//           : 'text-border',
+//     )}
+//   >
+//     {change > 0 ? `▲£${change}` : change < 0 ? `▼£${Math.abs(change)}` : '—£0'}
+//   </span>
+// );
 
-const formatWinnings = (amount: number) => (
-  <span className={cn(amount >= 0 ? 'text-green-600' : 'text-red-600')}>
-    £{Math.abs(amount)}
-  </span>
-);
-
-const formatWinningsChange = (change: number) => (
-  <span
-    className={cn(
-      change > 0
-        ? 'text-green-600'
-        : change < 0
-          ? 'text-red-600'
-          : 'text-border',
-    )}
-  >
-    {change > 0 ? `▲£${change}` : change < 0 ? `▼£${Math.abs(change)}` : '—£0'}
-  </span>
-);
-
-const formatRankChange = (change: number) => (
-  <span
-    className={cn(
-      change > 0
-        ? 'text-green-600'
-        : change < 0
-          ? 'text-red-600'
-          : 'text-border',
-    )}
-  >
-    {change > 0 ? `▲${change}` : change < 0 ? `▼${Math.abs(change)}` : '—0'}
-  </span>
-);
+// const formatRankChange = (change: number) => (
+//   <span
+//     className={cn(
+//       change > 0
+//         ? 'text-green-600'
+//         : change < 0
+//           ? 'text-red-600'
+//           : 'text-border',
+//     )}
+//   >
+//     {change > 0 ? `▲${change}` : change < 0 ? `▼${Math.abs(change)}` : '—0'}
+//   </span>
+// );
 
 export const columns: ColumnDef<TLeaderBoard>[] = [
   {
     accessorKey: 'rank',
     header: ({ column }) => <Btn column={column}>Rank</Btn>,
-    cell: ({ row }) => (
-      <div className={cn(getRankColor(row.original.rank), 'rounded px-2 py-1')}>
-        {row.original.rank}
-      </div>
-    ),
+    cell: ({ row, table }) => {
+      const rank = row.original.rank;
+      const totalParticipants = table.getFilteredRowModel().rows.length;
+
+      return (
+        <div className={cn(getRankColor(rank), 'rounded px-2 py-1')}>
+          {getRankDisplay(rank, totalParticipants)}
+        </div>
+      );
+    },
   },
-  {
-    accessorKey: 'change',
-    header: '+/-',
-    cell: () => formatRankChange(1),
-  },
+  // {
+  //   accessorKey: 'change',
+  //   header: '+/-',
+  //   cell: () => formatRankChange(1),
+  // },
   {
     accessorKey: 'name',
     header: ({ column }) => <Btn column={column}>Name</Btn>,
@@ -89,11 +81,18 @@ export const columns: ColumnDef<TLeaderBoard>[] = [
   {
     accessorKey: 'winnings',
     header: ({ column }) => <Btn column={column}>Winnings</Btn>,
-    cell: ({ row }) => formatWinnings(row.original.winnings),
+    cell: ({ row }) => {
+      const amount = row.original.winnings;
+      return (
+        <span className={cn(amount >= 0 ? 'text-green-600' : 'text-red-600')}>
+          {priceFormatter(Math.abs(amount))}
+        </span>
+      );
+    },
   },
-  {
-    accessorKey: 'winningsChange',
-    header: '+/-',
-    cell: () => formatWinningsChange(10),
-  },
+  // {
+  //   accessorKey: 'winningsChange',
+  //   header: '+/-',
+  //   cell: () => formatWinningsChange(10),
+  // },
 ];
