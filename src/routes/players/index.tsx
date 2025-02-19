@@ -9,7 +9,7 @@ function Players() {
   return (
     <>
       <Title
-        title='All players'
+        title='Players'
         desc='Browse through the list of poker players and select a player to view their stats for the season.'
       />
       <PlayersTable />

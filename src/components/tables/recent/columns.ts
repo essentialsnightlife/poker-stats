@@ -13,12 +13,12 @@ export const columns: ColumnDef<TResultSummary>[] = [
     header: 'Location',
   },
   {
-    accessorKey: 'winner',
-    header: 'Winner',
-  },
-  {
     accessorKey: 'number_of_players',
     header: 'Players',
+  },
+  {
+    accessorKey: 'winner',
+    header: 'Winner',
   },
   {
     accessorKey: 'buy_in_price',

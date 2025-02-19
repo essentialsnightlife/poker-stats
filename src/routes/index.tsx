@@ -10,7 +10,7 @@ function Index() {
   return (
     <>
       <Title
-        title='Poker Stats Pro'
+        title='PokerStats'
         desc=' Elevate your game with advanced analytics and insights'
       />
 

@@ -1,26 +1,24 @@
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
+import { Slot } from '@radix-ui/react-slot';
 
 function Card({
+  asChild = false,
   className,
-  children,
-  title,
   ...props
-}: React.ComponentProps<'div'> & Partial<{ title: string }>) {
+}: React.ComponentProps<'div'> & Partial<{ asChild: boolean }>) {
+  const Component = asChild ? Slot : 'div';
+
   return (
-    <div
+    <Component
       data-slot='card'
       className={cn(
         'bg-card text-card-foreground rounded-xl border p-3 md:p-4 lg:p-6',
-        title && 'space-y-3',
         className,
       )}
       {...props}
-    >
-      {title && <CardTitle>{title}</CardTitle>}
-      {children}
-    </div>
+    />
   );
 }
 

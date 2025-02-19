@@ -30,7 +30,7 @@ export const columns: ColumnDef<TGameResult>[] = [
             position === 3 &&
               'bg-orange-100 text-orange-900 dark:bg-orange-900 dark:text-orange-100',
           )}
-          variant={position > 3 ? 'secondary' : 'outline'}
+          variant='outline'
         >
           {position}
         </Badge>
@@ -49,15 +49,12 @@ export const columns: ColumnDef<TGameResult>[] = [
   {
     accessorKey: 'total_spend',
     header: 'Total Spent',
+    cell: ({ row }) => priceFormatter(row.original.total_spend),
   },
   {
     accessorKey: 'total_winnings',
     header: 'Total Won',
-    cell: ({ row }) => (
-      <p className='text-green-600 dark:text-green-400'>
-        {priceFormatter(row.original.total_winnings)}
-      </p>
-    ),
+    cell: ({ row }) => priceFormatter(row.original.total_winnings),
   },
   {
     accessorKey: 'net_winnings',
