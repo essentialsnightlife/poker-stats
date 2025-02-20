@@ -21,8 +21,8 @@ export const Route = createFileRoute(ROUTES.gameId)({
 });
 
 function RouteComponent() {
-  const { gameId, isLoading } = Route.useLoaderData();
-  const { data } = useGetDetailedResults(gameId);
+  const { gameId } = Route.useLoaderData();
+  const { data, isLoading } = useGetDetailedResults(gameId);
 
   if (isLoading) return <Loader size='lg' />;
   if (!data) return null;
