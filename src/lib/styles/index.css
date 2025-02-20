@@ -1,11 +1,9 @@
-@import url('./fonts.css');
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
 @theme {
-  --font-geist: "Geist", sans-serif;
   --font-poppins: "Poppins", sans-serif;
 }
 
