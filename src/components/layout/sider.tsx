@@ -1,5 +1,5 @@
 import { useMatchRoute } from '@tanstack/react-router';
-import { Home, Users, PlayCircle } from 'lucide-react';
+import { Home, Users, PlayCircle, X } from 'lucide-react';
 import {
   Sidebar,
   SidebarHeader,
@@ -9,6 +9,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
+  SidebarTrigger,
 } from '../ui/sidebar';
 import { User } from './user';
 import { useAppStore } from '@/lib/store/app';
@@ -44,22 +45,18 @@ export const Sider = () => {
 
   return (
     <Sidebar collapsible='icon'>
-      <SidebarHeader>
-        <SidebarMenuButton
-          size='lg'
-          asChild
-          className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
-          onClick={handleToggleMobileMenu}
-        >
-          <Link to='/'>
-            <img
-              src='https://i.pinimg.com/736x/39/91/e5/3991e53761dd9fee0d874cde9d512a8b.jpg'
-              alt='Poker stats'
-              className='aspect-square size-8 rounded-lg border'
-            />
-            <span className='font-semibold'>PokerStats</span>
-          </Link>
-        </SidebarMenuButton>
+      <SidebarHeader className='flex-row items-center justify-between'>
+        <Link to='/'>
+          <img src='/logo.svg' alt='Poker stats' className='size-10' />
+        </Link>
+
+        {isMobile ? (
+          <SidebarTrigger>
+            <X />
+          </SidebarTrigger>
+        ) : (
+          <SidebarTrigger className='[[data-state=collapsed]_&]:hidden' />
+        )}
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -83,6 +80,8 @@ export const Sider = () => {
       </SidebarContent>
 
       <SidebarFooter>
+        <SidebarTrigger className='hidden [[data-state=collapsed]_&]:flex' />
+
         <User />
       </SidebarFooter>
     </Sidebar>

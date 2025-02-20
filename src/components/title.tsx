@@ -3,7 +3,7 @@ export const Title = ({ desc, title }: { desc: string; title: string }) => (
     <h1 className='text-primary text-2xl font-bold sm:text-3xl lg:text-4xl'>
       {title}
     </h1>
-    <p className='text-muted-foreground text-sm sm:text-base md:text-lg lg:text-xl'>
+    <p className='text-muted-foreground text-sm md:text-base lg:text-lg'>
       {desc}
     </p>
   </div>

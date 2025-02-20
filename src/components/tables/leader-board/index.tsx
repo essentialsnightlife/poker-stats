@@ -10,7 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import type { SortingState } from '@tanstack/react-table';
 import { useGetLeaderboard } from '@/lib/services/players';
 import { columns } from './columns';
-import { Card } from '@/components/ui/card';
+import { Card, CardTitle } from '@/components/ui/card';
 import { Empty } from '../empty';
 
 export const LeaderBoard = () => {
@@ -27,7 +27,8 @@ export const LeaderBoard = () => {
   });
 
   return (
-    <Card title='Leaderboard'>
+    <Card>
+      <CardTitle className='mb-3'>Leaderboard</CardTitle>
       <Table>
         <TableHeader>
           <TableRow>

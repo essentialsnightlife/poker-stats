@@ -17,6 +17,7 @@ export type TGameStatistics = {
 };
 
 export type TResultSummary = {
+  id: number;
   date: string;
   location: string;
   pic: string;

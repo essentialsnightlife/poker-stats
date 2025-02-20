@@ -1,17 +1,37 @@
-export const Route = createFileRoute('/games/$gameId')({
+import { Loader } from '@/components/ui/loader';
+import { useGetDetailedResults } from '@/lib/services/players';
+import { redirect } from '@tanstack/react-router';
+import { Title } from '@/components/title';
+import { Game } from '@/components/game';
+import { ROUTES } from '@/lib/constants';
+
+export const Route = createFileRoute(ROUTES.gameId)({
   component: RouteComponent,
   loader: async ({ params }) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    return {
-      gameId: params.gameId,
-    };
+    const { gameId } = params;
+
+    if (!gameId || !/^\d+$/.test(gameId)) {
+      throw redirect({ to: '/games' });
+    }
+
+    return { gameId: Number(gameId) };
   },
-  pendingComponent: () => <div>Loading...</div>,
+  pendingComponent: () => <Loader size='lg' />,
   errorComponent: () => <div>Error</div>,
 });
 
 function RouteComponent() {
-  const { gameId } = Route.useLoaderData();
+  const { gameId, isLoading } = Route.useLoaderData();
+  const { data } = useGetDetailedResults(gameId);
 
-  return <div>Hello {gameId}!</div>;
+  if (isLoading) return <Loader size='lg' />;
+  if (!data) return null;
+
+  return (
+    <>
+      <Title title={`Game #${gameId}`} desc='Detailed Poker Game Results' />
+
+      <Game data={data} />
+    </>
+  );
 }

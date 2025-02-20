@@ -6,8 +6,9 @@ import { redirect } from '@tanstack/react-router';
 import { Loader } from '@/components/ui/loader';
 import { PlayerDashboard } from '@/components/dashboard';
 import { PlayerStats } from '@/components/player';
+import { ROUTES } from '@/lib/constants';
 
-export const Route = createFileRoute('/players/$playerId')({
+export const Route = createFileRoute(ROUTES.playerId)({
   component: RouteComponent,
   loader: async ({ params }) => {
     const { playerId } = params;

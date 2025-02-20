@@ -1,8 +1,9 @@
 import { LeaderBoard, RecentGames } from '@/components/tables';
 import { Statistics } from '@/components/statistics';
 import { Title } from '@/components/title';
+import { ROUTES } from '@/lib/constants';
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute(ROUTES.home)({
   component: Index,
 });
 

@@ -1,5 +1,5 @@
 import { useGetRecentResultsSummary } from '@/lib/services/players';
-import { Card } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
   TableHeader,
@@ -8,12 +8,14 @@ import {
   TableCell,
   TableBody,
 } from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import { columns } from './columns';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Empty } from '../empty';
+import { Button } from '@/components/ui/button';
 
 export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
+  const { navigate } = useRouter();
   const { data, isLoading } = useGetRecentResultsSummary(limit);
 
   const table = useReactTable({
@@ -22,8 +24,21 @@ export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const handleClick = (gameId: number) => {
+    navigate({ to: `/games/${gameId}` });
+  };
+
   return (
     <Card>
+      {limit < 10 && (
+        <CardHeader className='items-center justify-between'>
+          <CardTitle>Recent Games</CardTitle>
+
+          <Button size='sm' asChild>
+            <Link to='/games'>View All Games</Link>
+          </Button>
+        </CardHeader>
+      )}
       <Table>
         <TableHeader>
           <TableRow>
@@ -52,7 +67,11 @@ export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
             ))
           ) : table.getRowModel().rows.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow
+                key={row.id}
+                className='cursor-pointer'
+                onClick={handleClick.bind(null, row.original.id)}
+              >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -65,14 +84,6 @@ export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
           )}
         </TableBody>
       </Table>
-
-      {limit < 10 && (
-        <div className='mt-4 flex justify-end'>
-          <Button size='sm' asChild>
-            <Link to='/games'>View All Games</Link>
-          </Button>
-        </div>
-      )}
     </Card>
   );
 };

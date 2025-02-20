@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { VariantProps, cva } from 'class-variance-authority';
-import { PanelLeftIcon } from 'lucide-react';
+import { PanelRight } from 'lucide-react';
 
 import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { cn } from '@/lib/utils';
@@ -98,7 +98,7 @@ function Sidebar({
           data-sidebar='sidebar'
           data-slot='sidebar'
           data-mobile='true'
-          className='bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden'
+          className='bg-sidebar text-sidebar-foreground border-secondary-foreground dark:border-border w-(--sidebar-width) p-0 [&>button]:hidden'
           style={
             {
               '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
@@ -182,7 +182,8 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      {props.children || <PanelRight />}
+
       <span className='sr-only'>Toggle Sidebar</span>
     </Button>
   );

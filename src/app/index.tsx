@@ -5,7 +5,9 @@ import { routeTree } from '@/routeTree.gen';
 const router = createRouter({ routeTree });
 
 export const App = () => (
-  <TanstackProvider>
-    <RouterProvider router={router} />
-  </TanstackProvider>
+  <>
+    <TanstackProvider>
+      <RouterProvider router={router} />
+    </TanstackProvider>
+  </>
 );

@@ -1,14 +1,3 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap"); */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-@import "tailwindcss";
-@plugin "tailwindcss-animate";
-
-@custom-variant dark (&:is(.dark *));
-
-@theme {
-  --font-inter: "Inter", sans-serif;
-}
-
 :root {
   --background: hsl(220 33% 98%);
   --foreground: hsl(220 10% 10%);
@@ -31,7 +20,7 @@
   --border: hsl(220 15% 90%);
   --input: hsl(220 15% 90%);
   --ring: hsl(220 65% 30%);
-  --radius: 0.5rem;
+  --radius: 0.7rem;
 
   --sidebar: hsl(220 20% 18%);
   --sidebar-foreground: hsl(220 10% 90%);
@@ -81,6 +70,7 @@
   --sidebar-ring: hsl(220 65% 60%);
 }
 
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -118,61 +108,4 @@
   --color-rank-2: var(--rank-2);
   --color-rank-3: var(--rank-3);
   --color-rank-text: var(--rank-text);
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply font-inter bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-}
-
-@utility container {
-  padding: 1rem;
-  margin-inline: auto;
-  max-width: 100%;
-
-  @variant sm {
-    padding: 1rem 2rem;
-  }
-
-  @variant md {
-    padding: 1rem 4rem;
-  }
-
-  @variant lg {
-    padding: 1rem;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }

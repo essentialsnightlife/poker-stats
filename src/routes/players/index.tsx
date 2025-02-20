@@ -1,7 +1,8 @@
 import { PlayersTable } from '@/components/tables';
 import { Title } from '@/components/title';
+import { ROUTES } from '@/lib/constants';
 
-export const Route = createFileRoute('/players/')({
+export const Route = createFileRoute(ROUTES.players)({
   component: Players,
 });
 

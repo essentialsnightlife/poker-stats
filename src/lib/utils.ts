@@ -1,6 +1,7 @@
+import { QueryClient } from '@tanstack/react-query';
 import { clsx, type ClassValue } from 'clsx';
 import dayjs from 'dayjs';
-import { createBrowserHistory } from 'history';
+import { cache } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { StoreApi, UseBoundStore } from 'zustand';
 
@@ -8,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const history = createBrowserHistory();
+export const getQueryClient = cache(() => new QueryClient());
 
 type WithSelectors<S> = S extends { getState: () => infer T }
   ? S & { use: { [K in keyof T]: () => T[K] } }
@@ -36,4 +37,20 @@ export const priceFormatter = (amount: number, currency = 'GBP') => {
     style: 'currency',
     currency,
   }).format(amount);
+};
+
+export const getRoute = (...routes: Array<string | number>) => {
+  let route = '';
+
+  for (let i = 0; i < routes.length; i++) {
+    if (String(routes[i]).startsWith('/')) {
+      route += routes[i];
+    } else if (String(routes[i]).startsWith('?')) {
+      route += routes[i];
+    } else {
+      route += `/${routes[i]}`;
+    }
+  }
+
+  return route;
 };

@@ -141,8 +141,9 @@ export const useGetPlayerData = (playerId: number) => {
   };
 };
 
-// Games > Get Detailed Results
-const getDetailedResults = async (gameId: number): Promise<TDetailedResult> =>
+export const getDetailedResults = async (
+  gameId: number,
+): Promise<TDetailedResult> =>
   (
     await supabase
       .from(Endpoints.GetDetailedResults)

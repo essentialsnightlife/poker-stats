@@ -1,0 +1,158 @@
+@import url('./fonts.css');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+@theme {
+  --font-geist: "Geist", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+}
+
+:root {
+  --background: hsl(220 33% 98%);
+  --foreground: hsl(220 10% 10%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(220 10% 10%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(220 10% 10%);
+  --primary: hsl(220 65% 30%);
+  --primary-foreground: hsl(220 10% 98%);
+  --secondary: hsl(220 15% 94%);
+  --secondary-foreground: hsl(220 10% 30%);
+  --muted: hsl(220 15% 94%);
+  --muted-foreground: hsl(220 10% 45%);
+  --accent: hsl(220 55% 90%);
+  --accent-foreground: hsl(220 65% 25%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --success: hsl(142 72% 29%);
+  --success-foreground: hsl(142 10% 98%);
+  --border: hsl(220 15% 90%);
+  --input: hsl(220 15% 90%);
+  --ring: hsl(220 65% 30%);
+  --radius: 0.7rem;
+
+  --sidebar: hsl(220 20% 18%);
+  --sidebar-foreground: hsl(220 10% 90%);
+  --sidebar-primary: hsl(220 65% 30%);
+  --sidebar-primary-foreground: hsl(220 10% 98%);
+  --sidebar-accent: hsl(220 15% 22%);
+  --sidebar-accent-foreground: hsl(220 10% 98%);
+  --sidebar-border: hsl(220 15% 25%);
+  --sidebar-ring: hsl(220 65% 30%);
+
+  --rank-1: hsl(45 97% 54%);
+  --rank-2: hsl(210 11% 71%);
+  --rank-3: hsl(27 75% 60%);
+  --rank-text: hsl(210 20% 98%);
+}
+
+.dark {
+  --background: hsl(220 20% 12%);
+  --foreground: hsl(220 10% 98%);
+  --card: hsl(220 20% 15%);
+  --card-foreground: hsl(220 10% 98%);
+  --popover: hsl(220 20% 15%);
+  --popover-foreground: hsl(220 10% 98%);
+  --primary: hsl(220 65% 60%);
+  --primary-foreground: hsl(220 10% 98%);
+  --secondary: hsl(220 15% 20%);
+  --secondary-foreground: hsl(220 10% 90%);
+  --muted: hsl(220 15% 20%);
+  --muted-foreground: hsl(220 10% 60%);
+  --accent: hsl(220 55% 25%);
+  --accent-foreground: hsl(220 65% 90%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --success: hsl(142 72% 35%);
+  --success-foreground: hsl(142 10% 98%);
+  --border: hsl(220 15% 25%);
+  --input: hsl(220 15% 25%);
+  --ring: hsl(220 65% 60%);
+
+  --sidebar: hsl(220 20% 10%);
+  --sidebar-foreground: hsl(220 10% 90%);
+  --sidebar-primary: hsl(220 65% 60%);
+  --sidebar-primary-foreground: hsl(220 10% 98%);
+  --sidebar-accent: hsl(220 15% 18%);
+  --sidebar-accent-foreground: hsl(220 10% 98%);
+  --sidebar-border: hsl(220 15% 25%);
+  --sidebar-ring: hsl(220 65% 60%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-rank-1: var(--rank-1);
+  --color-rank-2: var(--rank-2);
+  --color-rank-3: var(--rank-3);
+  --color-rank-text: var(--rank-text);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-poppins;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@utility container {
+  padding: 1rem;
+  margin-inline: auto;
+  max-width: 100%;
+
+  @variant sm {
+    padding: 1rem 2rem;
+  }
+
+  @variant md {
+    padding: 1rem 4rem;
+  }
+
+  @variant lg {
+    padding: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
