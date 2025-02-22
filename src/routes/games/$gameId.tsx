@@ -4,6 +4,7 @@ import { redirect } from '@tanstack/react-router';
 import { Title } from '@/components/title';
 import { Game } from '@/components/game';
 import { ROUTES } from '@/lib/constants';
+import { GameDetailPage } from '@/components/test';
 
 export const Route = createFileRoute(ROUTES.gameId)({
   component: RouteComponent,
@@ -29,6 +30,7 @@ function RouteComponent() {
 
   return (
     <>
+      <GameDetailPage data={data} />
       <Title title={`Game #${gameId}`} desc='Detailed Poker Game Results' />
 
       <Game data={data} />
