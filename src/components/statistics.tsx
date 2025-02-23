@@ -24,7 +24,7 @@ export function Statistics() {
         description='Total amount spent on games'
       />
       <Box
-        title='Total Buy-ins'
+        title='Total Buy Ins'
         value={data.total_buy_ins}
         icon={ShoppingCart}
         color='text-purple-500'

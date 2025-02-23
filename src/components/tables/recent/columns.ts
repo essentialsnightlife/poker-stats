@@ -22,7 +22,7 @@ export const columns: ColumnDef<TResultSummary>[] = [
   },
   {
     accessorKey: 'buy_in_price',
-    header: 'Buy-in',
+    header: 'Buy In',
     cell: ({ row }) => priceFormatter(row.original.buy_in_price || 0),
   },
   {
