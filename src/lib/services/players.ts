@@ -5,6 +5,7 @@ import {
   TLeaderBoard,
   TPlayer,
   TPlayerDashboard,
+  TRankingResults,
   TResultSummary,
 } from '@/types/players';
 import { supabase } from './api';
@@ -157,4 +158,19 @@ export const useGetDetailedResults = (gameId: number) =>
   useQuery({
     queryKey: [Endpoints.GetDetailedResults, gameId],
     queryFn: () => getDetailedResults(gameId),
+  });
+
+const getGameRankings = async (gameId: number): Promise<TRankingResults[]> =>
+  (
+    await supabase
+      .from(Endpoints.GetResultRankings)
+      .select()
+      .eq('game_id', gameId)
+      .throwOnError()
+  ).data;
+
+export const useGetGameRankings = (gameId: number) =>
+  useQuery({
+    queryKey: [Endpoints.GetResultRankings, gameId],
+    queryFn: () => getGameRankings(gameId),
   });

@@ -8,19 +8,19 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import {
-  CalendarIcon,
-  Users,
-  RefreshCcw,
-  Trophy,
-  Award,
-  PoundSterling,
-} from 'lucide-react';
+import { Users, RefreshCcw, PoundSterling } from 'lucide-react';
 import { Title } from './title';
 import { dateFormatter, priceFormatter } from '@/lib/utils';
 import { TDetailedResult } from '@/types/players';
+import { ReactNode } from 'react';
 
-export function GameDetailPage({ data }: { data: TDetailedResult }) {
+export function Game({
+  data,
+  children,
+}: {
+  data: TDetailedResult;
+  children: ReactNode;
+}) {
   return (
     <>
       <Title
@@ -32,10 +32,6 @@ export function GameDetailPage({ data }: { data: TDetailedResult }) {
         <Card className='space-y-3'>
           <CardTitle>Game Summary</CardTitle>
           <div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'>
-            <div className='flex items-center space-x-2'>
-              <CalendarIcon className='text-blue-400' />
-              <span>{new Date(data.date).toLocaleDateString()}</span>
-            </div>
             <div className='flex items-center space-x-2'>
               <PoundSterling className='text-green-400' />
               <span>{priceFormatter(data.total_pot)} Total-pot</span>
@@ -51,18 +47,6 @@ export function GameDetailPage({ data }: { data: TDetailedResult }) {
             <div className='flex items-center space-x-2'>
               <RefreshCcw className='text-red-400' />
               <span>{data.total_rebuys} Rebuys</span>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <Trophy className='text-yellow-400' />
-              <span>{data.winner}</span>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <Award className='text-gray-400' />
-              <span>{data.second_place}</span>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <Award className='text-orange-400' />
-              <span>{data.third_place}</span>
             </div>
           </div>
 
@@ -89,24 +73,30 @@ export function GameDetailPage({ data }: { data: TDetailedResult }) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow className='bg-rank-1/80'>
-                <TableCell className='font-medium'>🥇 1st</TableCell>
+              <TableRow>
+                <TableCell className='bg-rank-1 text-rank-text px-2 py-1'>
+                  1st
+                </TableCell>
                 <TableCell>{data.winner}</TableCell>
                 <TableCell>1</TableCell>
                 <TableCell className='text-right'>
                   ${data.total_pot * 0.5}
                 </TableCell>
               </TableRow>
-              <TableRow className='bg-rank-2/80'>
-                <TableCell className='font-medium'>🥈 2nd</TableCell>
+              <TableRow>
+                <TableCell className='bg-rank-2 text-rank-text px-2 py-1'>
+                  2nd
+                </TableCell>
                 <TableCell>{data.second_place}</TableCell>
                 <TableCell>1</TableCell>
                 <TableCell className='text-right'>
                   ${data.total_pot * 0.3}
                 </TableCell>
               </TableRow>
-              <TableRow className='bg-rank-3/80'>
-                <TableCell className='font-medium'>🥉 3rd</TableCell>
+              <TableRow>
+                <TableCell className='bg-rank-3 text-rank-text px-2 py-1'>
+                  3rd
+                </TableCell>
                 <TableCell>{data.third_place}</TableCell>
                 <TableCell>1</TableCell>
                 <TableCell className='text-right'>
@@ -122,6 +112,8 @@ export function GameDetailPage({ data }: { data: TDetailedResult }) {
             </TableBody>
           </Table>
         </Card>
+
+        {children}
 
         {data.comments && (
           <Card>

@@ -1,10 +1,9 @@
 import { Loader } from '@/components/ui/loader';
 import { useGetDetailedResults } from '@/lib/services/players';
 import { redirect } from '@tanstack/react-router';
-import { Title } from '@/components/title';
-import { Game } from '@/components/game';
+import { Rankings } from '@/components/tables';
 import { ROUTES } from '@/lib/constants';
-import { GameDetailPage } from '@/components/test';
+import { Game } from '@/components/game';
 
 export const Route = createFileRoute(ROUTES.gameId)({
   component: RouteComponent,
@@ -29,11 +28,8 @@ function RouteComponent() {
   if (!data) return null;
 
   return (
-    <>
-      <GameDetailPage data={data} />
-      <Title title={`Game #${gameId}`} desc='Detailed Poker Game Results' />
-
-      <Game data={data} />
-    </>
+    <Game data={data}>
+      <Rankings gameId={gameId} />
+    </Game>
   );
 }

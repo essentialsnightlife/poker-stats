@@ -7,4 +7,5 @@ export enum Endpoints {
   GetLeaderBoard = 'leaderboard_2025',
   GetGameStatistics = 'game_statistics',
   GetResultsSummary = 'results_summary',
+  GetResultRankings = 'poker_results_rankings',
 }

@@ -6,12 +6,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Skeleton } from '@/components/ui/skeleton';
 import type { SortingState } from '@tanstack/react-table';
 import { useGetLeaderboard } from '@/lib/services/players';
 import { columns } from './columns';
 import { Card, CardTitle } from '@/components/ui/card';
 import { Empty } from '../empty';
+import { Loader } from '../loader';
 
 export const LeaderBoard = () => {
   const { data, isLoading } = useGetLeaderboard();
@@ -46,15 +46,7 @@ export const LeaderBoard = () => {
         </TableHeader>
         <TableBody>
           {isLoading ? (
-            Array.from({ length: 6 }).map((_, index) => (
-              <TableRow key={index}>
-                {columns.map((row) => (
-                  <TableCell key={row.id}>
-                    <Skeleton className='h-7 w-full' />
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
+            <Loader columns={columns} length={6} />
           ) : table.getRowModel().rows.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow

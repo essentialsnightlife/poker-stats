@@ -79,3 +79,12 @@ export type TDetailedResult = {
   last_place: string;
   pic: string;
 };
+
+export type TRankingResults = {
+  game_id: number;
+  player_name: string;
+  player_nickname: string;
+  finishing_position: number;
+  no_of_buy_ins: number;
+  total_winnings: number;
+};
