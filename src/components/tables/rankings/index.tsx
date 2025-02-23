@@ -19,7 +19,6 @@ export const Rankings = ({ gameId }: { gameId: number }) => {
   const table = useReactTable({
     data: data || [],
     columns,
-    getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
   });
 

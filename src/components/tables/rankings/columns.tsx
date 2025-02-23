@@ -19,12 +19,8 @@ export const columns: ColumnDef<TRankingResults>[] = [
     },
   },
   {
-    accessorKey: 'player_nickname',
-    header: 'Player Nickname',
-  },
-  {
     accessorKey: 'player_name',
-    header: 'Player Name',
+    header: 'Player name',
   },
   {
     accessorKey: 'no_of_buy_ins',
