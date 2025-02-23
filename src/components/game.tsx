@@ -68,14 +68,16 @@ export function Game({
               <TableRow>
                 <TableHead className='w-[100px]'>Rank</TableHead>
                 <TableHead>Player</TableHead>
-                <TableHead>Buy-ins</TableHead>
+                <TableHead>Buy Ins</TableHead>
                 <TableHead className='text-right'>Winnings</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow>
-                <TableCell className='bg-rank-1 text-rank-text px-2 py-1'>
-                  1st
+                <TableCell>
+                  <div className='bg-rank-1 text-rank-text rounded px-2 py-1'>
+                    1st
+                  </div>
                 </TableCell>
                 <TableCell>{data.winner}</TableCell>
                 <TableCell>1</TableCell>
@@ -84,8 +86,10 @@ export function Game({
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className='bg-rank-2 text-rank-text px-2 py-1'>
-                  2nd
+                <TableCell>
+                  <div className='bg-rank-2 text-rank-text rounded px-2 py-1'>
+                    2nd
+                  </div>
                 </TableCell>
                 <TableCell>{data.second_place}</TableCell>
                 <TableCell>1</TableCell>
@@ -94,8 +98,10 @@ export function Game({
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className='bg-rank-3 text-rank-text px-2 py-1'>
-                  3rd
+                <TableCell>
+                  <div className='bg-rank-3 text-rank-text rounded px-2 py-1'>
+                    3rd
+                  </div>
                 </TableCell>
                 <TableCell>{data.third_place}</TableCell>
                 <TableCell>1</TableCell>
