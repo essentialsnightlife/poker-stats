@@ -20,7 +20,7 @@ export const columns: ColumnDef<TRankingResults>[] = [
   },
   {
     accessorKey: 'player_name',
-    header: 'Player name',
+    header: 'Name',
   },
   {
     accessorKey: 'no_of_buy_ins',
@@ -28,7 +28,7 @@ export const columns: ColumnDef<TRankingResults>[] = [
   },
   {
     accessorKey: 'total_winnings',
-    header: 'Total Winnings',
+    header: 'Winnings',
     cell: ({ row }) => {
       const amount = row.original.total_winnings;
       return (
