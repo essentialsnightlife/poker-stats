@@ -1,6 +1,6 @@
 export type TLeaderBoard = {
   rank: number;
-  name: string;
+  nickname: string;
   games_played: number;
   win_percentage: number;
   wins: number;

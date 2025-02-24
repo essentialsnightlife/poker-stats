@@ -53,7 +53,7 @@ export const columns: ColumnDef<TLeaderBoard>[] = [
   //   cell: () => formatRankChange(1),
   // },
   {
-    accessorKey: 'name',
+    accessorKey: 'nickname',
     header: ({ column }) => <Btn column={column}>Name</Btn>,
   },
   {
