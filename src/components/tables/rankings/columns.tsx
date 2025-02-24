@@ -19,7 +19,7 @@ export const columns: ColumnDef<TRankingResults>[] = [
     },
   },
   {
-    accessorKey: 'player_name',
+    accessorKey: 'player_nickname',
     header: 'Name',
   },
   {
