@@ -4,34 +4,6 @@ import { Btn } from './btn';
 import { cn, priceFormatter } from '@/lib/utils';
 import { getRankColor, getRankDisplay } from './utils';
 
-// const formatWinningsChange = (change: number) => (
-//   <span
-//     className={cn(
-//       change > 0
-//         ? 'text-green-600'
-//         : change < 0
-//           ? 'text-red-600'
-//           : 'text-border',
-//     )}
-//   >
-//     {change > 0 ? `▲£${change}` : change < 0 ? `▼£${Math.abs(change)}` : '—£0'}
-//   </span>
-// );
-
-// const formatRankChange = (change: number) => (
-//   <span
-//     className={cn(
-//       change > 0
-//         ? 'text-green-600'
-//         : change < 0
-//           ? 'text-red-600'
-//           : 'text-border',
-//     )}
-//   >
-//     {change > 0 ? `▲${change}` : change < 0 ? `▼${Math.abs(change)}` : '—0'}
-//   </span>
-// );
-
 export const columns: ColumnDef<TLeaderBoard>[] = [
   {
     accessorKey: 'rank',
@@ -47,11 +19,6 @@ export const columns: ColumnDef<TLeaderBoard>[] = [
       );
     },
   },
-  // {
-  //   accessorKey: 'change',
-  //   header: '+/-',
-  //   cell: () => formatRankChange(1),
-  // },
   {
     accessorKey: 'nickname',
     header: ({ column }) => <Btn column={column}>Name</Btn>,
@@ -59,24 +26,34 @@ export const columns: ColumnDef<TLeaderBoard>[] = [
   {
     accessorKey: 'games_played',
     header: ({ column }) => <Btn column={column}>Played</Btn>,
+    sortingFn: 'basic',
+    sortDescFirst: true,
   },
   {
     accessorKey: 'win_percentage',
     header: ({ column }) => <Btn column={column}>Win</Btn>,
     cell: ({ row }) => `${row.original.win_percentage}%`,
+    sortingFn: 'basic',
+    sortDescFirst: true,
   },
   {
     accessorKey: 'wins',
     header: ({ column }) => <Btn column={column}>Wins</Btn>,
+    sortingFn: 'basic',
+    sortDescFirst: true,
   },
   {
     accessorKey: 'ppg',
     header: ({ column }) => <Btn column={column}>PPG</Btn>,
     cell: ({ row }) => row.original.ppg.toFixed(2),
+    sortingFn: 'basic',
+    sortDescFirst: true,
   },
   {
     accessorKey: 'total_points',
     header: ({ column }) => <Btn column={column}>Points</Btn>,
+    sortingFn: 'basic',
+    sortDescFirst: true,
   },
   {
     accessorKey: 'winnings',
@@ -89,10 +66,7 @@ export const columns: ColumnDef<TLeaderBoard>[] = [
         </span>
       );
     },
+    sortingFn: 'basic',
+    sortDescFirst: true,
   },
-  // {
-  //   accessorKey: 'winningsChange',
-  //   header: '+/-',
-  //   cell: () => formatWinningsChange(10),
-  // },
 ];

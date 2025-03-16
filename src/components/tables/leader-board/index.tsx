@@ -15,7 +15,10 @@ import { Loader } from '../loader';
 
 export const LeaderBoard = () => {
   const { data, isLoading } = useGetLeaderboard();
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: 'winnings', desc: true },
+    { id: 'points', desc: true },
+  ]);
 
   const table = useReactTable({
     data: data || [],
@@ -24,6 +27,12 @@ export const LeaderBoard = () => {
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
     state: { sorting },
+    initialState: {
+      sorting: [
+        { id: 'winnings', desc: true },
+        { id: 'total_points', desc: true },
+      ],
+    },
   });
 
   return (

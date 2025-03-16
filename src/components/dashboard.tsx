@@ -1,4 +1,4 @@
-import { Trophy, Users, Calendar, Medal } from 'lucide-react';
+import { Trophy, Users, Medal } from 'lucide-react';
 import { TPlayerDashboard } from '@/types/players';
 import { Box } from './box';
 
@@ -6,7 +6,7 @@ export function PlayerDashboard({ data }: { data?: TPlayerDashboard }) {
   if (!data) return null;
 
   return (
-    <div className='mb-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4'>
+    <div className='mb-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
       <Box
         title='Games Played'
         value={data.games_played}
@@ -27,22 +27,6 @@ export function PlayerDashboard({ data }: { data?: TPlayerDashboard }) {
         icon={Medal}
         color='text-blue-500'
         description='1st or 2nd place'
-      />
-
-      <Box
-        title='Days Since Last Win'
-        value={data.days_since_last_win || 'N/A'}
-        color='text-muted-foreground'
-        icon={Calendar}
-        description={
-          data.days_since_last_win === 0
-            ? 'Won today!'
-            : data.days_since_last_win === 1
-              ? 'Last won yesterday'
-              : data.days_since_last_win
-                ? `Last won ${data.days_since_last_win} days ago`
-                : 'N/A'
-        }
       />
     </div>
   );
