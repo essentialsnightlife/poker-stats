@@ -14,7 +14,7 @@ export function Statistics() {
         value={data.total_games_played}
         icon={Users}
         color='text-blue-500'
-        description='Number of games participated'
+        description='Number of games hosted'
       />
       <Box
         title='Total Spend on Games'
@@ -28,7 +28,7 @@ export function Statistics() {
         value={data.total_buy_ins}
         icon={ShoppingCart}
         color='text-purple-500'
-        description='Number of initial buy-ins'
+        description='Number of buy-ins + rebuys'
       />
       <Box
         title='Total Rebuys'
