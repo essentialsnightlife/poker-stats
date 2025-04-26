@@ -20,12 +20,13 @@ export const PlayerStats = ({ data }: { data?: TPlayer }) => {
 
         <div className='space-y-1'>
           <h1 className='flex items-end gap-1 text-3xl font-bold sm:text-4xl'>
-            {data.name}{' '}
-            {data.nickname && (
-              <span className='text-xl font-normal opacity-70'>
-                ({data.nickname})
-              </span>
-            )}
+            {data.name}
+            {/*{' '}*/}
+            {/*{data.nickname && (*/}
+            {/*  <span className='text-xl font-normal opacity-70'>*/}
+            {/*    ({data.nickname})*/}
+            {/*  </span>*/}
+            {/*)}*/}
           </h1>
 
           <div className='text-muted-foreground grid auto-cols-max grid-flow-col items-center gap-2 text-xs font-medium'>
