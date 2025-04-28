@@ -27,6 +27,10 @@ export const columns: ColumnDef<TRankingResults>[] = [
     header: 'Buy Ins',
   },
   {
+    accessorKey: 'bounties_won',
+    header: 'Bounties Won',
+  },
+  {
     accessorKey: 'total_winnings',
     header: 'Winnings',
     cell: ({ row }) => {

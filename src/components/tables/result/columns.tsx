@@ -52,6 +52,10 @@ export const columns: ColumnDef<TGameResult>[] = [
     cell: ({ row }) => priceFormatter(row.original.total_spend),
   },
   {
+    accessorKey: 'bounties_won',
+    header: 'Bounties Won',
+  },
+  {
     accessorKey: 'total_winnings',
     header: 'Total Won',
     cell: ({ row }) => priceFormatter(row.original.total_winnings),

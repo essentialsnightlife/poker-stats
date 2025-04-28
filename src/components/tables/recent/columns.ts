@@ -13,10 +13,6 @@ export const columns: ColumnDef<TResultSummary>[] = [
     header: 'Location',
   },
   {
-    accessorKey: 'number_of_players',
-    header: 'Players',
-  },
-  {
     accessorKey: 'winner',
     header: 'Winner',
   },
@@ -26,13 +22,13 @@ export const columns: ColumnDef<TResultSummary>[] = [
     cell: ({ row }) => priceFormatter(row.original.buy_in_price || 0),
   },
   {
+    accessorKey: 'number_of_players',
+    header: 'Players',
+  },
+  {
     accessorKey: 'total_rebuys',
     header: 'Rebuys',
   },
-  // {
-  //   accessorKey: 'winner',
-  //   header: 'Winner',
-  // },
   {
     accessorKey: 'total_pot',
     header: 'Total Pot',
