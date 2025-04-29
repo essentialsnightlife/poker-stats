@@ -37,6 +37,7 @@
     "dayjs": "^1.11.13",
     "framer-motion": "^12.4.4",
     "lucide-react": "^0.475.0",
+    "modern-screenshot": "^4.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.1",
