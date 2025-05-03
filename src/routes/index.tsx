@@ -18,7 +18,7 @@ function Index() {
     <>
       <Title
         title='PokerStats'
-        desc=' Elevate your game with advanced analytics and insights'
+        desc='Analytics for the crew'
       />
 
       <div className='space-y-4'>
