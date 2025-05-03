@@ -61,13 +61,6 @@ export const columns: ColumnDef<TLeaderBoard>[] = [
     invertSorting: true,
   },
   {
-    accessorKey: 'ppg',
-    header: ({ column }) => <Btn column={column}>PPG</Btn>,
-    cell: ({ row }) => row.original.ppg.toFixed(2),
-    sortingFn: 'basic',
-    invertSorting: true,
-  },
-  {
     accessorKey: 'winnings',
     header: ({ column }) => <Btn column={column}>Winnings</Btn>,
     cell: ({ row }) => {
