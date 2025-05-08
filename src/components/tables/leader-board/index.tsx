@@ -9,9 +9,15 @@ import {
 import type { SortingState } from '@tanstack/react-table';
 import { useGetLeaderboard } from '@/lib/services/players';
 import { columns } from './columns';
-import { Card, CardTitle } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Empty } from '../empty';
 import { Loader } from '../loader';
+import { Button } from '@/components/ui/button.tsx';
+import { onShareButtonClick } from '@/lib/utils.ts';
+
+function onButtonClick() {
+  onShareButtonClick();
+}
 
 export const LeaderBoard = () => {
   const { data, isLoading } = useGetLeaderboard();
@@ -37,7 +43,12 @@ export const LeaderBoard = () => {
 
   return (
     <Card>
-      <CardTitle className='mb-3'>Leaderboard</CardTitle>
+      <CardHeader className='items-center justify-between'>
+        <CardTitle>Leaderboard</CardTitle>
+        <Button onClick={onButtonClick} size='sm'>
+          Share Leaderboard
+        </Button>
+      </CardHeader>
       <Table>
         <TableHeader>
           <TableRow>
