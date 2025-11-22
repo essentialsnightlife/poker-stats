@@ -30,6 +30,12 @@ export const columns: ColumnDef<TLeaderBoard>[] = [
     invertSorting: true,
   },
   {
+    accessorKey: 'total_buy_ins',
+    header: ({ column }) => <Btn column={column}>Buy Ins</Btn>,
+    sortingFn: 'basic',
+    invertSorting: true,
+  },
+  {
     accessorKey: 'wins',
     header: ({ column }) => <Btn column={column}>Wins</Btn>,
     sortingFn: 'basic',
