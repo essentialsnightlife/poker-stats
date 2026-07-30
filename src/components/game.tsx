@@ -64,8 +64,8 @@ export function Game({
 
         <div className='mt-8 flex justify-center'>
           <Button asChild>
-            <Link to='/recent-games'>
-              <RefreshCcw /> Back to Recent Games
+            <Link to='/games'>
+              <RefreshCcw /> Back to All Games
             </Link>
           </Button>
         </div>

@@ -9,7 +9,7 @@ export const Route = createFileRoute(ROUTES.games)({
 function Games() {
   return (
     <>
-      <Title title='Recent Poker Games' desc='View the latest poker results' />
+      <Title title='All Games' desc='View all poker results' />
       <RecentGames />
     </>
   );

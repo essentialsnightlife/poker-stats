@@ -39,17 +39,18 @@ export const useGetGameStatistics = () =>
 // Home Page > Recent Games
 // Games > Games Overview
 const getRecentResultsSummary = async (
-  limit: number = 5,
-): Promise<TResultSummary[]> =>
-  (
-    await supabase
-      .from(Endpoints.GetResultsSummary)
-      .select()
-      .limit(limit)
-      .throwOnError()
-  ).data;
+  limit?: number,
+): Promise<TResultSummary[]> => {
+  let query = supabase.from(Endpoints.GetResultsSummary).select();
 
-export const useGetRecentResultsSummary = (limit: number) =>
+  if (limit) {
+    query = query.limit(limit);
+  }
+
+  return (await query.throwOnError()).data;
+};
+
+export const useGetRecentResultsSummary = (limit?: number) =>
   useQuery({
     queryKey: [Endpoints.GetResultsSummary, limit],
     queryFn: () => getRecentResultsSummary(limit),

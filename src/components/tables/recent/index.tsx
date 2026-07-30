@@ -14,7 +14,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Empty } from '../empty';
 import { Button } from '@/components/ui/button';
 
-export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
+export const RecentGames = ({ limit }: { limit?: number }) => {
   const { navigate } = useRouter();
   const { data, isLoading } = useGetRecentResultsSummary(limit);
 
@@ -30,7 +30,7 @@ export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
 
   return (
     <Card>
-      {limit < 10 && (
+      {limit && (
         <CardHeader className='items-center justify-between'>
           <CardTitle>Recent Games</CardTitle>
 
@@ -56,7 +56,7 @@ export const RecentGames = ({ limit = 10 }: { limit?: number }) => {
         </TableHeader>
         <TableBody className='w-fit overflow-x-auto'>
           {isLoading ? (
-            Array.from({ length: limit }).map((_, index) => (
+            Array.from({ length: limit ?? 10 }).map((_, index) => (
               <TableRow key={index}>
                 {columns.map((row) => (
                   <TableCell key={row.id}>
