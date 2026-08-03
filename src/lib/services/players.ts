@@ -35,19 +35,33 @@ export const useGetLeaderboard = (seasonYear?: number) =>
     queryFn: () => getLeaderboard(seasonYear),
   });
 
-const getGameStatistics = async (): Promise<TGameStatistics> =>
-  (
+const getGameStatistics = async (
+  seasonYear?: number,
+): Promise<TGameStatistics> => {
+  if (!seasonYear) {
+    return (
+      await supabase
+        .from(Endpoints.GetGameStatistics)
+        .select()
+        .throwOnError()
+        .single()
+    ).data;
+  }
+
+  return (
     await supabase
-      .from(Endpoints.GetGameStatistics)
+      .from(Endpoints.GetGameStatisticsBySeason)
       .select()
+      .eq('season_year', seasonYear)
       .throwOnError()
       .single()
   ).data;
+};
 
-export const useGetGameStatistics = () =>
+export const useGetGameStatistics = (seasonYear?: number) =>
   useQuery({
-    queryKey: [Endpoints.GetGameStatistics],
-    queryFn: getGameStatistics,
+    queryKey: [Endpoints.GetGameStatistics, seasonYear ?? 'all'],
+    queryFn: () => getGameStatistics(seasonYear),
   });
 
 // Home Page > Recent Games

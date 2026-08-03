@@ -40,6 +40,12 @@ const getSeasonOptions = () => {
   );
 };
 
+const getSeasonLabel = (season: LeaderBoardSeason) => {
+  if (season === 'all') return '';
+
+  return `Season ${season - SEASON_YEAR_OFFSET} ${season}`;
+};
+
 export const LeaderBoard = ({
   selectedSeason = 'all',
   onSeasonChange,
@@ -52,6 +58,7 @@ export const LeaderBoard = ({
   const seasonOptions = useMemo(() => getSeasonOptions(), []);
   const seasonYear =
     typeof selectedSeason === 'number' ? selectedSeason : undefined;
+  const seasonLabel = getSeasonLabel(selectedSeason);
   const { data, isLoading } = useGetLeaderboard(seasonYear);
   const [sorting, setSorting] = useState<SortingState>([
     { id: 'winnings', desc: true },
@@ -76,7 +83,9 @@ export const LeaderBoard = ({
   return (
     <Card>
       <CardHeader className='flex-col justify-between gap-3 sm:flex-row sm:items-center'>
-        <CardTitle>Leaderboard</CardTitle>
+        <CardTitle>
+          Leaderboard{seasonLabel ? ` (${seasonLabel})` : ''}
+        </CardTitle>
         {showControls ? (
           <Button onClick={onButtonClick} size='sm'>
             Share Leaderboard

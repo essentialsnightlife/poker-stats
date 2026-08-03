@@ -21,7 +21,7 @@ function Index() {
           selectedSeason={selectedSeason}
           onSeasonChange={setSelectedSeason}
         />
-        <Statistics />
+        <Statistics selectedSeason={selectedSeason} />
         <div
           id='shareDiv'
           className='space-y-4'
@@ -34,7 +34,7 @@ function Index() {
           }}
         >
           <LeaderBoard selectedSeason={selectedSeason} showControls={false} />
-          <Statistics />
+          <Statistics selectedSeason={selectedSeason} />
         </div>
       </div>
     </>

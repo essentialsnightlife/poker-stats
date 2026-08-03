@@ -2,9 +2,16 @@ import { useGetGameStatistics } from '@/lib/services/players';
 import { Users, ShoppingCart, PoundSterling, RefreshCw } from 'lucide-react';
 import { priceFormatter } from '@/lib/utils';
 import { Box } from './box';
+import type { LeaderBoardSeason } from './tables/leader-board';
 
-export function Statistics() {
-  const { data } = useGetGameStatistics();
+export function Statistics({
+  selectedSeason = 'all',
+}: {
+  selectedSeason?: LeaderBoardSeason;
+}) {
+  const seasonYear =
+    typeof selectedSeason === 'number' ? selectedSeason : undefined;
+  const { data } = useGetGameStatistics(seasonYear);
 
   if (!data) return null;
   return (

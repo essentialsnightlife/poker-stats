@@ -17,6 +17,8 @@ export type TLeaderBoard = {
 };
 
 export type TGameStatistics = {
+  season_year?: number;
+  season_number?: number;
   total_games_played: number;
   total_spend_on_games: number;
   total_buy_ins: number;
