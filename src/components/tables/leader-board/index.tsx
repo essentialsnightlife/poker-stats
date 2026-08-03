@@ -10,17 +10,49 @@ import type { SortingState } from '@tanstack/react-table';
 import { useGetLeaderboard } from '@/lib/services/players';
 import { columns } from './columns';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Empty } from '../empty';
 import { Loader } from '../loader';
 import { Button } from '@/components/ui/button.tsx';
 import { onShareButtonClick } from '@/lib/utils.ts';
 
+export type LeaderBoardSeason = 'all' | number;
+
+const STARTING_SEASON_YEAR = 2025;
+const SEASON_YEAR_OFFSET = 2020;
+
 function onButtonClick() {
   onShareButtonClick();
 }
 
-export const LeaderBoard = () => {
-  const { data, isLoading } = useGetLeaderboard();
+const getSeasonOptions = () => {
+  const currentYear = new Date().getFullYear();
+
+  return Array.from(
+    { length: Math.max(currentYear - STARTING_SEASON_YEAR + 1, 1) },
+    (_, index) => currentYear - index,
+  );
+};
+
+export const LeaderBoard = ({
+  selectedSeason = 'all',
+  onSeasonChange,
+  showControls = true,
+}: {
+  selectedSeason?: LeaderBoardSeason;
+  onSeasonChange?: (season: LeaderBoardSeason) => void;
+  showControls?: boolean;
+}) => {
+  const seasonOptions = useMemo(() => getSeasonOptions(), []);
+  const seasonYear =
+    typeof selectedSeason === 'number' ? selectedSeason : undefined;
+  const { data, isLoading } = useGetLeaderboard(seasonYear);
   const [sorting, setSorting] = useState<SortingState>([
     { id: 'winnings', desc: true },
     { id: 'points', desc: true },
@@ -43,12 +75,36 @@ export const LeaderBoard = () => {
 
   return (
     <Card>
-      <CardHeader className='items-center justify-between'>
+      <CardHeader className='flex-col justify-between gap-3 sm:flex-row sm:items-center'>
         <CardTitle>Leaderboard</CardTitle>
-        <Button onClick={onButtonClick} size='sm'>
-          Share Leaderboard
-        </Button>
+        {showControls ? (
+          <Button onClick={onButtonClick} size='sm'>
+            Share Leaderboard
+          </Button>
+        ) : null}
       </CardHeader>
+      {showControls ? (
+        <div className='mb-4 flex flex-col gap-2 sm:max-w-56'>
+          <Select
+            value={String(selectedSeason)}
+            onValueChange={(value) =>
+              onSeasonChange?.(value === 'all' ? 'all' : Number(value))
+            }
+          >
+            <SelectTrigger aria-label='Filter leaderboard by season'>
+              <SelectValue placeholder='All seasons' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value='all'>All</SelectItem>
+              {seasonOptions.map((year) => (
+                <SelectItem key={year} value={String(year)}>
+                  Season {year - SEASON_YEAR_OFFSET} ({year})
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      ) : null}
       <Table>
         <TableHeader>
           <TableRow>

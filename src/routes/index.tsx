@@ -2,18 +2,25 @@ import { LeaderBoard, RecentGames } from '@/components/tables';
 import { Statistics } from '@/components/statistics';
 import { Title } from '@/components/title';
 import { ROUTES } from '@/lib/constants';
+import type { LeaderBoardSeason } from '@/components/tables/leader-board';
 
 export const Route = createFileRoute(ROUTES.home)({
   component: Index,
 });
 
 function Index() {
+  const [selectedSeason, setSelectedSeason] =
+    useState<LeaderBoardSeason>('all');
+
   return (
     <>
       <Title title='PokerStats' desc='Analytics for the crew' />
       <div className='space-y-4'>
         <RecentGames limit={3} />
-        <LeaderBoard />
+        <LeaderBoard
+          selectedSeason={selectedSeason}
+          onSeasonChange={setSelectedSeason}
+        />
         <Statistics />
         <div
           id='shareDiv'
@@ -26,7 +33,7 @@ function Index() {
             borderRadius: '10px',
           }}
         >
-          <LeaderBoard />
+          <LeaderBoard selectedSeason={selectedSeason} showControls={false} />
           <Statistics />
         </div>
       </div>

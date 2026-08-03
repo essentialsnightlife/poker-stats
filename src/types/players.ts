@@ -1,11 +1,18 @@
 export type TLeaderBoard = {
   rank: number;
+  season_year?: number;
+  season_number?: number;
+  name: string;
   nickname: string;
   games_played: number;
+  total_buy_ins: number;
   win_percentage: number;
   wins: number;
   ppg: number;
   total_points: number;
+  sum_bounties_won: number;
+  total_bounties_count: number;
+  bpg: number;
   winnings: number;
 };
 

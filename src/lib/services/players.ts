@@ -12,13 +12,27 @@ import { supabase } from './api';
 import { useQueries } from '@tanstack/react-query';
 import { Endpoints } from './endpoints';
 
-const getLeaderboard = async (): Promise<TLeaderBoard[]> =>
-  (await supabase.from(Endpoints.GetLeaderBoard).select().throwOnError()).data;
+const getLeaderboard = async (
+  seasonYear?: number,
+): Promise<TLeaderBoard[]> => {
+  if (!seasonYear) {
+    return (await supabase.from(Endpoints.GetLeaderBoard).select().throwOnError())
+      .data;
+  }
 
-export const useGetLeaderboard = () =>
+  return (
+    await supabase
+      .from(Endpoints.GetLeaderBoardBySeason)
+      .select()
+      .eq('season_year', seasonYear)
+      .throwOnError()
+  ).data;
+};
+
+export const useGetLeaderboard = (seasonYear?: number) =>
   useQuery({
-    queryKey: [Endpoints.GetLeaderBoard],
-    queryFn: getLeaderboard,
+    queryKey: [Endpoints.GetLeaderBoard, seasonYear ?? 'all'],
+    queryFn: () => getLeaderboard(seasonYear),
   });
 
 const getGameStatistics = async (): Promise<TGameStatistics> =>
