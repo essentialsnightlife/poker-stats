@@ -33,6 +33,18 @@ const EMPTY_PLAYERS: GameResultPlayer[] = [];
 const getPlayerDisplayName = ({ name, nickname }: PlayerName) =>
   nickname?.trim() || name;
 
+const getPlayerNet = (
+  player: GameResultPlayer,
+  buyInPrice: number,
+  bountyValue: number,
+) =>
+  player.potWinnings -
+  player.buyIns * buyInPrice +
+  player.bounties * bountyValue;
+
+const formatNet = (value: number) =>
+  `${value >= 0 ? '+' : '−'}${formatMoney(Math.abs(value))}`;
+
 export function RecordResultForm({
   initialPlayers = EMPTY_PLAYERS,
   showStatePreview = false,
@@ -238,6 +250,11 @@ export function RecordResultForm({
           </table>
         </div>
       </div>
+      <WinnerNetWarning
+        players={players}
+        buyInPrice={buyInPrice}
+        bountyValue={bountyValue}
+      />
       <BalanceCheck
         totals={totals}
         isBalanced={isBalanced}
@@ -399,10 +416,7 @@ function PlayerRow({
   bountyValue: number;
 }) {
   const displayName = getPlayerDisplayName(player);
-  const net =
-    player.potWinnings -
-    player.buyIns * buyInPrice +
-    player.bounties * bountyValue;
+  const net = getPlayerNet(player, buyInPrice, bountyValue);
   return (
     <tr
       draggable
@@ -466,8 +480,7 @@ function PlayerRow({
       <td
         className={`font-semibold ${net >= 0 ? 'text-success' : 'text-destructive'}`}
       >
-        {net >= 0 ? '+' : '−'}
-        {formatMoney(Math.abs(net))}
+        {formatNet(net)}
       </td>
       <td className='pr-3 text-right'>
         <Button
@@ -487,6 +500,48 @@ function PlayerRow({
 }
 
 type GameTotals = ReturnType<typeof getGameTotals>;
+
+function WinnerNetWarning({
+  players,
+  buyInPrice,
+  bountyValue,
+}: {
+  players: GameResultPlayer[];
+  buyInPrice: number;
+  bountyValue: number;
+}) {
+  if (players.length < 2) return null;
+
+  const winner = players[0];
+  const highestEarner = players.reduce((highest, player) =>
+    getPlayerNet(player, buyInPrice, bountyValue) >
+    getPlayerNet(highest, buyInPrice, bountyValue)
+      ? player
+      : highest,
+  );
+  const winnerNet = getPlayerNet(winner, buyInPrice, bountyValue);
+  const highestNet = getPlayerNet(highestEarner, buyInPrice, bountyValue);
+
+  if (highestEarner.id === winner.id || highestNet <= winnerNet) return null;
+
+  return (
+    <div
+      role='status'
+      className='flex items-start gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 p-4'
+    >
+      <TriangleAlert className='mt-0.5 size-5 shrink-0 text-amber-600' />
+      <div>
+        <p className='font-medium'>Check the winner against net winnings</p>
+        <p className='text-muted-foreground text-sm'>
+          {getPlayerDisplayName(highestEarner)} has the highest net at{' '}
+          {formatNet(highestNet)}, while winner {getPlayerDisplayName(winner)}
+          {' is '}
+          {formatNet(winnerNet)}. Confirm the finishing order is correct.
+        </p>
+      </div>
+    </div>
+  );
+}
 
 function BalanceCheck({
   totals,
