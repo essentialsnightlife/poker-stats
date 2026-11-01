@@ -12,12 +12,11 @@ import { supabase } from './api';
 import { useQueries } from '@tanstack/react-query';
 import { Endpoints } from './endpoints';
 
-const getLeaderboard = async (
-  seasonYear?: number,
-): Promise<TLeaderBoard[]> => {
+const getLeaderboard = async (seasonYear?: number): Promise<TLeaderBoard[]> => {
   if (!seasonYear) {
-    return (await supabase.from(Endpoints.GetLeaderBoard).select().throwOnError())
-      .data;
+    return (
+      await supabase.from(Endpoints.GetLeaderBoard).select().throwOnError()
+    ).data;
   }
 
   return (
@@ -82,6 +81,25 @@ export const useGetRecentResultsSummary = (limit?: number) =>
   useQuery({
     queryKey: [Endpoints.GetResultsSummary, limit],
     queryFn: () => getRecentResultsSummary(limit),
+  });
+
+const getLocations = async (): Promise<string[]> => {
+  const rows = (
+    await supabase
+      .from(Endpoints.GetResultsSummary)
+      .select('location')
+      .not('location', 'is', null)
+      .order('location')
+      .throwOnError()
+  ).data;
+
+  return [...new Set(rows.map(({ location }) => location).filter(Boolean))];
+};
+
+export const useGetLocations = () =>
+  useQuery({
+    queryKey: [Endpoints.GetResultsSummary, 'locations'],
+    queryFn: getLocations,
   });
 
 // Players > Choose Player > Drop Down menu
