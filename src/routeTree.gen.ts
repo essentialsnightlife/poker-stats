@@ -15,6 +15,8 @@ import { Route as IndexImport } from './routes/index'
 import { Route as PlayersIndexImport } from './routes/players/index'
 import { Route as GamesIndexImport } from './routes/games/index'
 import { Route as PlayersPlayerIdImport } from './routes/players/$playerId'
+import { Route as GamesRecordImport } from './routes/games/record'
+import { Route as GamesNewPrototypeImport } from './routes/games/new-prototype'
 import { Route as GamesGameIdImport } from './routes/games/$gameId'
 
 // Create/Update Routes
@@ -43,6 +45,18 @@ const PlayersPlayerIdRoute = PlayersPlayerIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const GamesRecordRoute = GamesRecordImport.update({
+  id: '/games/record',
+  path: '/games/record',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GamesNewPrototypeRoute = GamesNewPrototypeImport.update({
+  id: '/games/new-prototype',
+  path: '/games/new-prototype',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const GamesGameIdRoute = GamesGameIdImport.update({
   id: '/games/$gameId',
   path: '/games/$gameId',
@@ -65,6 +79,20 @@ declare module '@tanstack/react-router' {
       path: '/games/$gameId'
       fullPath: '/games/$gameId'
       preLoaderRoute: typeof GamesGameIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/games/new-prototype': {
+      id: '/games/new-prototype'
+      path: '/games/new-prototype'
+      fullPath: '/games/new-prototype'
+      preLoaderRoute: typeof GamesNewPrototypeImport
+      parentRoute: typeof rootRoute
+    }
+    '/games/record': {
+      id: '/games/record'
+      path: '/games/record'
+      fullPath: '/games/record'
+      preLoaderRoute: typeof GamesRecordImport
       parentRoute: typeof rootRoute
     }
     '/players/$playerId': {
@@ -96,6 +124,8 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/games/$gameId': typeof GamesGameIdRoute
+  '/games/new-prototype': typeof GamesNewPrototypeRoute
+  '/games/record': typeof GamesRecordRoute
   '/players/$playerId': typeof PlayersPlayerIdRoute
   '/games': typeof GamesIndexRoute
   '/players': typeof PlayersIndexRoute
@@ -104,6 +134,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/games/$gameId': typeof GamesGameIdRoute
+  '/games/new-prototype': typeof GamesNewPrototypeRoute
+  '/games/record': typeof GamesRecordRoute
   '/players/$playerId': typeof PlayersPlayerIdRoute
   '/games': typeof GamesIndexRoute
   '/players': typeof PlayersIndexRoute
@@ -113,6 +145,8 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/games/$gameId': typeof GamesGameIdRoute
+  '/games/new-prototype': typeof GamesNewPrototypeRoute
+  '/games/record': typeof GamesRecordRoute
   '/players/$playerId': typeof PlayersPlayerIdRoute
   '/games/': typeof GamesIndexRoute
   '/players/': typeof PlayersIndexRoute
@@ -123,15 +157,26 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/games/$gameId'
+    | '/games/new-prototype'
+    | '/games/record'
     | '/players/$playerId'
     | '/games'
     | '/players'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/games/$gameId' | '/players/$playerId' | '/games' | '/players'
+  to:
+    | '/'
+    | '/games/$gameId'
+    | '/games/new-prototype'
+    | '/games/record'
+    | '/players/$playerId'
+    | '/games'
+    | '/players'
   id:
     | '__root__'
     | '/'
     | '/games/$gameId'
+    | '/games/new-prototype'
+    | '/games/record'
     | '/players/$playerId'
     | '/games/'
     | '/players/'
@@ -141,6 +186,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GamesGameIdRoute: typeof GamesGameIdRoute
+  GamesNewPrototypeRoute: typeof GamesNewPrototypeRoute
+  GamesRecordRoute: typeof GamesRecordRoute
   PlayersPlayerIdRoute: typeof PlayersPlayerIdRoute
   GamesIndexRoute: typeof GamesIndexRoute
   PlayersIndexRoute: typeof PlayersIndexRoute
@@ -149,6 +196,8 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GamesGameIdRoute: GamesGameIdRoute,
+  GamesNewPrototypeRoute: GamesNewPrototypeRoute,
+  GamesRecordRoute: GamesRecordRoute,
   PlayersPlayerIdRoute: PlayersPlayerIdRoute,
   GamesIndexRoute: GamesIndexRoute,
   PlayersIndexRoute: PlayersIndexRoute,
@@ -166,6 +215,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/games/$gameId",
+        "/games/new-prototype",
+        "/games/record",
         "/players/$playerId",
         "/games/",
         "/players/"
@@ -176,6 +227,12 @@ export const routeTree = rootRoute
     },
     "/games/$gameId": {
       "filePath": "games/$gameId.tsx"
+    },
+    "/games/new-prototype": {
+      "filePath": "games/new-prototype.tsx"
+    },
+    "/games/record": {
+      "filePath": "games/record.tsx"
     },
     "/players/$playerId": {
       "filePath": "players/$playerId.tsx"
